@@ -6,13 +6,18 @@
 #    By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/18 12:11:49 by kipouliq          #+#    #+#              #
-#    Updated: 2023/12/19 11:36:39 by kipouliq         ###   ########.fr        #
+#    Updated: 2023/12/22 17:57:43 by kipouliq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-SRC = make_stack.c
+SRC = make_stack.c \
+		list_functions.c \
+		stack_instructions.c \
+		stack_instructions2.c \
+		args_parsing.c \
+		args_parsing2.c 
 
 OBJ = $(SRC:.c=.o)
 

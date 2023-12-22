@@ -6,120 +6,117 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:28:13 by kipouliq          #+#    #+#             */
-/*   Updated: 2023/12/19 19:08:22 by kipouliq         ###   ########.fr       */
+/*   Updated: 2023/12/22 18:02:14 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./push_swap.h"
-#include <stdio.h>
 
-void    ft_print_lst(t_list **lst)
+void	swap(t_list **stack)
 {
-    t_list  *current;
+	t_list	*tmp;
 
-    current = *lst;
-    while (current)
-    {
-        printf("current = %d\n", current->value);
-        current = current->next;
-    }
+	tmp = *stack;
+	*stack = (*stack)->next;
+	tmp->next = (*stack)->next;
+	(*stack)->next = tmp;
 }
 
-t_list  *ft_lstnew(int nb)
+void	rotate(t_list **stack)
 {
-    t_list  *new_node;
+	t_list	*tmp;
+	t_list	*current;
 
-    new_node = malloc(sizeof(t_list));
-    if (!new_node)
-        return (NULL);
-    new_node->value = nb;
-    new_node->next = NULL;    
-    return (new_node);
+	tmp = *stack;
+	*stack = (*stack)->next;
+	current = *stack;
+	while (current->next)
+		current = current->next;
+	current->next = tmp;
+	tmp->next = NULL;
 }
 
-void    ft_lstadd_back(t_list **stack, t_list *new_node)
+void	reverse_rotate(t_list **stack)
 {
-    t_list *current;
-    
-    current = *stack;
-    while (current->next)
-        current = current->next;
-    current->next = new_node;
-}
+	t_list	*current;
+	t_list	*head;
+	t_list	*prev;
 
-t_list	*init_stack_a(int argc, char **args)
-{
-	int		i;
-	int		nb;
-	t_list	*elem;
-	t_list	*stack;
-
-	i = 0;
-    stack = NULL;
-	while (--argc > 0)
+	head = *stack;
+	current = *stack;
+	while (current->next)
 	{
-		nb = ft_atoi(args[argc]);
-		elem = ft_lstnew(nb);
-		if (!elem)
-			return (NULL); // a changer, need free function
-        if (!stack)
-        {
-            stack = elem;
-            continue;
-        }
-        ft_lstadd_back(&stack, elem);
+		prev = current;
+		current = current->next;
 	}
-	return (stack);
+	*stack = current;
+	(*stack)->next = head;
+	prev->next = NULL;
 }
 
-void    swap(t_list **stack)
+void	push_a(t_list **stack_a, t_list **stack_b)
 {
-    t_list *tmp;
+	t_list	*head_a;
+	t_list	*head_b;
 
-    tmp = *stack;
-    *stack = (*stack)->next;
-    tmp->next = (*stack)->next;
-    (*stack)->next = tmp;
+	if (!(*stack_b))
+		return ;
+	head_b = *stack_b;
+	*stack_b = (*stack_b)->next;
+	if (!(*stack_a))
+	{
+		*stack_a = head_b;
+		head_b->next = NULL;
+	}
+	else
+	{
+		head_a = *stack_a;
+		*stack_a = head_b;
+		(*stack_a)->next = head_a;
+	}
+	ft_printf("pa\n");
 }
 
-void    rotate(t_list **stack)
+void	push_b(t_list **stack_a, t_list **stack_b)
 {
-    t_list *tmp;
-    t_list *current;
+	t_list	*head_a;
+	t_list	*head_b;
 
-    tmp = *stack;
-    *stack = (*stack)->next;
-    current = *stack;
-    while (current->next)
-        current = current->next;
-    current->next = tmp;
-    tmp->next = NULL;
-}
-
-void    reverse_rotate(t_list **stack)
-{
-    t_list *current;
-    t_list *prev;
-    // t_list *tmp;
-
-    current = *stack;
-    while (current->next)
-    {
-        prev = current;                 // not good
-        current = current->next;
-    }
-    current->next = *stack;
-    prev->next = NULL;
+	if (!(*stack_a))
+		return ;
+	head_a = *stack_a;
+	*stack_a = (*stack_a)->next;
+	if (!(*stack_b))
+	{
+		*stack_b = head_a;
+		head_a->next = NULL;
+	}
+	else
+	{
+		head_b = *stack_b;
+		*stack_b = head_a;
+		(*stack_b)->next = head_b;
+	}
+	ft_printf("pb\n");
 }
 
 int	main(int argc, char **argv)
 {
-	t_list *stack_a;
+	t_list	*stack_a;
+	t_list	*stack_b;
 
-	stack_a = init_stack_a(argc, argv);
-    ft_print_lst(&stack_a);
-    reverse_rotate(&stack_a);
-    printf("----\n");
-    ft_print_lst(&stack_a);
-    // ft_lstclear(stack_a);
+	if (!args_checker(argc, argv))
+    {
+        printf("ERROR\n");
+		return (-1);
+    }
+	stack_a = init_stack(argc, argv);
+	stack_b = NULL;
+	ft_print_lst(&stack_a, &stack_b, argc - 1);
+    swap_b(&stack_b);
+	ft_print_lst(&stack_a, &stack_b, argc - 1);
+	ft_free_stack(&stack_a);
+	ft_free_stack(&stack_b);
 }
+
+// SIGSEV avec 1 / 0 element
