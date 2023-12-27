@@ -6,7 +6,7 @@
 #    By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/16 14:33:33 by lekix             #+#    #+#              #
-#    Updated: 2023/12/19 11:37:39 by kipouliq         ###   ########.fr        #
+#    Updated: 2023/12/27 13:42:35 by kipouliq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ SRCS = ft_isalnum.c \
 		ft_striteri.c \
 		ft_strmapi.c \
 		ft_memmove.c \
-		ft_strtrim.c 
+		ft_strtrim.c \
 
 MAIN = main.c
 
