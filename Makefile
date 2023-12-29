@@ -6,7 +6,7 @@
 #    By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/18 12:11:49 by kipouliq          #+#    #+#              #
-#    Updated: 2023/12/27 17:23:49 by kipouliq         ###   ########.fr        #
+#    Updated: 2023/12/28 18:13:24 by kipouliq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRC = make_stack.c \
 		stack_instructions2.c \
 		args_parsing.c \
 		args_parsing2.c \
-		push_swap.c
+		push_swap.c \
+		algo_functions.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,13 +6,13 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:39:59 by kipouliq          #+#    #+#             */
-/*   Updated: 2023/12/22 17:36:11 by kipouliq         ###   ########.fr       */
+/*   Updated: 2023/12/29 15:37:08 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./push_swap.h"
 
-t_list  *ft_lstnew(int nb)
+t_list  *ft_lstnew(int nb, int pos)
 {
     t_list  *new_node;
 
@@ -20,7 +20,8 @@ t_list  *ft_lstnew(int nb)
     if (!new_node)
         return (NULL);
     new_node->value = nb;
-    new_node->next = NULL;    
+    new_node->position = pos;
+    new_node->next = NULL;
     return (new_node);
 }
 
@@ -46,7 +47,7 @@ t_list	*init_stack(int argc, char **args)
 	while (++i < argc)
 	{
 		nb = ft_atoi(args[i]);
-		elem = ft_lstnew(nb);
+		elem = ft_lstnew(nb, i - 1);
 		if (!elem)
 			return (NULL); // a changer, need free function
         if (!stack)
@@ -86,15 +87,15 @@ void    ft_print_lst(t_list **stack_a, t_list **stack_b, int elems)
     {
         if (current_a)
         {
-            printf("%d", current_a->value);
+            printf("%d, cost = %d", current_a->value, current_a->cost);
             current_a = current_a->next;
         }
         else
             printf("-");
-        printf("   ");
+        printf("            ");
         if (current_b)
         {
-            printf("%d\n", current_b->value);
+            printf("%d, cost = %d\n", current_b->value, current_b->cost);
             current_b = current_b->next;
         }
         else
