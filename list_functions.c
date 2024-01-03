@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:39:59 by kipouliq          #+#    #+#             */
-/*   Updated: 2023/12/29 15:37:08 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/03 15:24:34 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_list  *ft_lstnew(int nb, int pos)
         return (NULL);
     new_node->value = nb;
     new_node->position = pos;
+    new_node->target_node = NULL;
     new_node->next = NULL;
     return (new_node);
 }
