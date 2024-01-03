@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lekix <lekix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:16:46 by kipouliq          #+#    #+#             */
-/*   Updated: 2023/12/22 17:53:11 by kipouliq         ###   ########.fr       */
+/*   Updated: 2023/12/30 13:59:23 by lekix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,8 @@ int	ft_check_overflow(char *str)
 
 int	solo_arg_check(char *str)
 {
-	int	i;
-	int	plus_minus;
 	int	arg_len;
 
-	i = 0;
-	plus_minus = 0;
 	arg_len = ft_strlen(str);
 	if ((arg_len == 1 && !ft_isdigit(str[0])) || arg_len > 10)
 		return (0);

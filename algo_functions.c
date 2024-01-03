@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lekix <lekix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:12:58 by kipouliq          #+#    #+#             */
-/*   Updated: 2023/12/29 19:00:32 by kipouliq         ###   ########.fr       */
+/*   Updated: 2023/12/30 17:24:32 by lekix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int	calc_distance(int nb1, int nb2)
 {
-	int	diff;
-
-	diff = 0;
 	if (nb1 > nb2)
 		return (nb1 - nb2);
 	else
@@ -28,18 +25,17 @@ t_list	*find_target_node_pos(t_list **stack, t_list *node)
 	t_list	*current;
 	t_list	*closest;
 	int		closest_distance;
-	int		current_distance;
 
 	current = *stack;
-	closest_distance = calc_distance(current->value, node->value);
+	closest = NULL;
+	closest_distance = ft_min_max(stack, 1)->value - ft_min_max(stack,
+			0)->value;
 	while (current)
 	{
-		current_distance = calc_distance(current->value, node->value);
-		if (current_distance < closest_distance
-			|| (current_distance == closest_distance
-				&& node->value < current->value))
+		if (node->value > current->value && calc_distance(current->value,
+				node->value) < closest_distance)
 		{
-			closest_distance = current_distance;
+			closest_distance = calc_distance(current->value, node->value);
 			closest = current;
 		}
 		current = current->next;
@@ -47,22 +43,22 @@ t_list	*find_target_node_pos(t_list **stack, t_list *node)
 	return (closest);
 }
 
-void    calc_cost(t_list *node, t_list *min_max, t_list *closest_node)
+void	calc_cost(t_list *node, t_list *closest, t_list **s_a, t_list **s_b)
 {
-    if (closest_node)
-    {
-        if (closest_node->position >= (min_max->position / 2))
-            node->cost = node->position + (min_max->position - closest_node->position) + 1;
-        else
-            node->cost = node->position + closest_node->position + 1;
-    }
-    else
-    {
-        // if (node->position >= (min_max->position / 2))
-        //     node->cost = node->position + (min_max->position - node->position);
-        // else
-        node->cost = node->position + min_max->position + 1;
-    }
+	int	size;
+	int	cost;
+
+	cost = 0;
+	size_a = ft_lstsize(s_a);
+	size_b = ft_lstsize(s_b);
+    if (size_a % 2 == 0 && node->position < size_a / 2)
+        
+	// if (size % 2 == 0 && closest->position < size / 2)
+	// node->cost = node->position + closest->position;
+	// else if (size % 2 != 0 && closest->position <= size / 2)
+	// node->cost = node->position + closest->position;
+	// else
+	// node->cost = node->position + (size - closest->position);
 }
 
 void	edit_node_cost(t_list **stack, t_list *node)
@@ -74,35 +70,39 @@ void	edit_node_cost(t_list **stack, t_list *node)
 	min = ft_min_max(stack, 0);
 	max = ft_min_max(stack, 1);
 	if (node->value < min->value)
-        calc_cost(node, min, NULL);
+	{
+		closest_node = min;
+		calc_cost(node, min, stack);
+	}
 	else if (node->value > max->value)
-        calc_cost(node, max, NULL);
+	{
+		closest_node = max;
+		calc_cost(node, max, stack);
+	}
 	else
 	{
 		closest_node = find_target_node_pos(stack, node);
-        calc_cost(node, max, closest_node);
+		printf("node = %d, target = %d\n", node->value, closest_node->value);
+		calc_cost(node, closest_node, stack);
 	}
-	// if (!(node->cost))
-		// node->cost = 1;
 }
 
-void    edit_lst_costs(t_list **stack_a, t_list **stack_b)
+void	edit_lst_costs(t_list **stack_a, t_list **stack_b)
 {
-    t_list *current;
+	t_list	*current;
 
-    current = *stack_a;
-    while (current)
-    {
-        edit_node_cost(stack_b, current);
-        current = current->next;
-    }
+	current = *stack_a;
+	while (current)
+	{
+		edit_node_cost(stack_b, current);
+		current = current->next;
+	}
 }
 
 int	main(int argc, char **argv)
 {
 	t_list *stack_a;
 	t_list *stack_b;
-	t_list *current;
 
 	if (!args_checker(argc, argv))
 	{
@@ -111,16 +111,14 @@ int	main(int argc, char **argv)
 	}
 	stack_a = init_stack(argc, argv);
 	stack_b = NULL;
-	current = stack_a;
-    ft_print_lst(&stack_a, &stack_b, argc - 1);
-    push_b(&stack_a, &stack_b);
-    push_b(&stack_a, &stack_b);
-    push_b(&stack_a, &stack_b);
-    push_b(&stack_a, &stack_b);
-    push_b(&stack_a, &stack_b);
-    push_b(&stack_a, &stack_b);
-    edit_lst_costs(&stack_a, &stack_b);
-    ft_print_lst(&stack_a, &stack_b, argc - 1);
+	push_b(&stack_a, &stack_b);
+	push_b(&stack_a, &stack_b);
+	push_b(&stack_a, &stack_b);
+	push_b(&stack_a, &stack_b);
+	push_b(&stack_a, &stack_b);
+	push_b(&stack_a, &stack_b);
+	edit_lst_costs(&stack_a, &stack_b);
+	ft_print_lst(&stack_a, &stack_b, argc - 1);
 	// ft_push_swap(&stack_a, &stack_b);
 	return (0);
 }
