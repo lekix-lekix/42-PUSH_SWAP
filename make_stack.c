@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:28:13 by kipouliq          #+#    #+#             */
-/*   Updated: 2023/12/28 18:00:20 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:13:42 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	push_a(t_list **stack_a, t_list **stack_b)
 	{
 		*stack_a = head_b;
         (*stack_a)->position = 0;
-        recalculate_position(stack_b);
 		(*stack_a)->next = NULL;
 	}
 	else
@@ -84,6 +83,8 @@ void	push_a(t_list **stack_a, t_list **stack_b)
 		*stack_a = head_b;
 		(*stack_a)->next = head_a;
 	}
+    recalculate_position(stack_a);
+    recalculate_position(stack_b);
 	ft_printf("pa\n");
 }
 
@@ -100,7 +101,6 @@ void	push_b(t_list **stack_a, t_list **stack_b)
 	{
 		*stack_b = head_a;
         head_a->position = 0;
-        recalculate_position(stack_a);
 		head_a->next = NULL;
 	}
 	else
@@ -108,9 +108,9 @@ void	push_b(t_list **stack_a, t_list **stack_b)
 		head_b = *stack_b;
 		*stack_b = head_a;
 		(*stack_b)->next = head_b;
-        recalculate_position(stack_a);
-        recalculate_position(stack_b);
 	}
+    recalculate_position(stack_a);
+    recalculate_position(stack_b);
 	ft_printf("pb\n");
 }
 

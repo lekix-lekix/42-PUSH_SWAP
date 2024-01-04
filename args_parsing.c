@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lekix <lekix@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:16:46 by kipouliq          #+#    #+#             */
-/*   Updated: 2023/12/30 13:59:23 by lekix            ###   ########.fr       */
+/*   Updated: 2024/01/04 16:56:25 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,15 @@ int	ft_check_overflow(char *str)
 	if (!test_str)
 		return (0);
 	if (!ft_strcmp(str, test_str))
-    {
-        free(test_str);
+	{
+		free(test_str);
 		return (0);
-    }
-    free(test_str);
+	}
+	free(test_str);
 	return (1);
 }
 
-int	solo_arg_check(char *str)
+int	arg_check(char *str)
 {
 	int	arg_len;
 
@@ -74,13 +74,19 @@ int	solo_arg_check(char *str)
 
 int	args_checker(int argc, char **args)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
-	i = 0;
-	while (++i < argc)
+	i = -1;
+	if (argc == 2)
 	{
-		if (!solo_arg_check(args[i]))
+        args = ft_split(args[1], ' ');
+        if (!args)
+            return (0);
+	}
+	while (args[++i])
+	{
+		if (arg_check(args[i]))
 			return (0);
 		j = i + 1;
 		while (j < argc)

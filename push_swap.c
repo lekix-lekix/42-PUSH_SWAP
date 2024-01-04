@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 14:08:51 by kipouliq          #+#    #+#             */
-/*   Updated: 2023/12/29 16:33:18 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:41:07 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,41 +91,6 @@ t_list	*ft_find_last(t_list **stack)
 		current = current->next;
 	return (current);
 }
-
-// void	ft_sort_5(t_list **stack_a, t_list **stack_b)
-// {
-// 	t_list	*last_a;
-//     t_list  *next_a;
-//     int     min;
-//     int     max;
-
-// 	push_b(stack_a, stack_b);
-// 	push_b(stack_a, stack_b);
-// 	ft_sort_3(stack_a);
-// 	while (ft_lstsize(stack_a) != 5)
-// 	{
-//         min = ft_min_max(stack_a, 0);
-//         max = ft_min_max(stack_a, 1);
-//         last_a = ft_find_last(stack_a);
-//         next_a = (*stack_a)->next;
-//         if (((*stack_b)->value < min && (*stack_a)->value == min))
-//             push_a(stack_a, stack_b);
-//         else if ((*stack_b)->value > max && (*stack_a)->value == max)
-//         {
-//             rotate_a(stack_a);
-//             push_a(stack_a, stack_b);
-//         }
-//         else if ((*stack_b)->value > (*stack_a)->value && (*stack_b)->value < next_a->value)
-//         {
-//             rotate_a(stack_a);
-//             push_a(stack_a, stack_b);
-//         }
-//         else
-//             rotate_a(stack_a);
-// 	}
-// 	while (!ft_verify_sort(stack_a))
-// 	    rotate_a(stack_a);
-// }
 
 void	ft_push_swap(t_list **stack_a, t_list **stack_b)
 {
