@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:16:46 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/04 16:56:25 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:41:49 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,29 +72,67 @@ int	arg_check(char *str)
 	return (1);
 }
 
-int	args_checker(int argc, char **args)
+int	tab_size(char **tab)
 {
-	int		i;
-	int		j;
+	int	i;
 
-	i = -1;
-	if (argc == 2)
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
+}
+
+int	args_parsing(char **args, int size)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < size)
 	{
-        args = ft_split(args[1], ' ');
-        if (!args)
-            return (0);
-	}
-	while (args[++i])
-	{
-		if (arg_check(args[i]))
+		if (!arg_check(args[i]))
 			return (0);
 		j = i + 1;
-		while (j < argc)
+		while (j < size)
 		{
 			if (ft_strcmp(args[i], args[j]))
 				return (0);
 			j++;
 		}
+		i++;
 	}
 	return (1);
 }
+
+char	**args_checker(int argc, char **args)
+{
+	int	size;
+    int malloc_flag;
+
+    malloc_flag = 0;
+	if (argc == 2)
+	{
+		args = ft_split(args[1], ' ');
+		if (!args)
+			return (NULL);
+        malloc_flag = 1;
+	}
+	size = tab_size(args);
+    if (!malloc_flag && args_parsing(args + 1, size - 1))
+        return (args);
+    else if (malloc_flag && args_parsing(args, size - 1))
+        return (args);
+    else
+        return (0);
+}
+
+// int	main(int argc, char **argv)
+// {
+// 	char **args;
+
+// 	args = args_checker(argc, argv);
+// 	if (!args)
+// 		printf("ERROR!\n");
+// 	else
+// 		printf("OK!\n");
+// }

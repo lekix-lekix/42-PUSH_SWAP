@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:15:14 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/03 17:49:04 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/05 15:41:05 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_list
 {
 	int				value;
 	int				position;
+    int             index;
 	int				cost;
 	struct s_list	*target_node;
 	struct s_list	*next;
@@ -48,7 +49,7 @@ void				ft_lstadd_back(t_list **stack, t_list *new_node);
 t_list				*init_stack(int argc, char **args);
 void				ft_free_stack(t_list **stack);
 void				ft_print_lst(t_list **stack_a, t_list **stack_b, int elems);
-int					args_checker(int argc, char **args);
+char				**args_checker(int argc, char **args);
 int					ft_lstsize(t_list **lst);
 t_list				*ft_min_max(t_list **stack, int min_or_max);
 void				recalculate_position(t_list **stack);

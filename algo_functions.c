@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:12:58 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/04 16:55:54 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/05 18:22:45 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_list	*find_target_node_b(t_list **stack, t_list *node)
 
 t_list	*find_target_node_a(t_list **stack, t_list *node)
 {
-    t_list	*current;
+	t_list	*current;
 	t_list	*closest;
 	int		closest_distance;
 
@@ -119,50 +119,51 @@ void	edit_cost_target_pushb(t_list **s_a, t_list **s_b, t_list *node)
 	}
 }
 
-void    edit_cost_target_pusha(t_list **s_a, t_list **s_b, t_list *node)
+void	edit_cost_target_pusha(t_list **s_a, t_list **s_b, t_list *node)
 {
-    t_list *min;
-    t_list *max;
+	t_list	*min;
+	t_list	*max;
 
-    min = ft_min_max(s_a, 0);
-    max = ft_min_max(s_a, 1);
-    node->cost = 0;
-    if (node->value < min->value || node->value > max->value)
-    {
-        node->target_node = min;
-        calc_cost(node, s_b, s_a);
-    }
-    else
-    {
-        // printf("Coucou\n");
-        node->target_node = find_target_node_a(s_a, node);
-        calc_cost(node, s_b, s_a);
-    }
-    // printf("node = %d target = %d pos = %d\n", node->value, node->target_node->value, node->position);
+	min = ft_min_max(s_a, 0);
+	max = ft_min_max(s_a, 1);
+	node->cost = 0;
+	if (node->value < min->value || node->value > max->value)
+	{
+		node->target_node = min;
+		calc_cost(node, s_b, s_a);
+	}
+	else
+	{
+		// printf("Coucou\n");
+		node->target_node = find_target_node_a(s_a, node);
+		calc_cost(node, s_b, s_a);
+	}
+	// printf("node = %d target = %d pos = %d\n", node->value,
+	// node->target_node->value, node->position);
 }
 
 void	edit_lst_costs(t_list **s_a, t_list **s_b, char a_b)
 {
 	t_list	*current;
 
-    if (a_b == 'b')
-    {
-	    current = *s_a;
-        while (current)
-        {
-            edit_cost_target_pushb(s_a, s_b, current);
-    		current = current->next;
-        }
-    }
-    else
+	if (a_b == 'b')
 	{
-        current = *s_b;
-        while (current)
-        {
-            edit_cost_target_pusha(s_a, s_b, current);
-            current = current->next;
-        }
-    }
+		current = *s_a;
+		while (current)
+		{
+			edit_cost_target_pushb(s_a, s_b, current);
+			current = current->next;
+		}
+	}
+	else
+	{
+		current = *s_b;
+		while (current)
+		{
+			edit_cost_target_pusha(s_a, s_b, current);
+			current = current->next;
+		}
+	}
 }
 
 t_list	*select_node(t_list **stack)
@@ -181,12 +182,12 @@ t_list	*select_node(t_list **stack)
 	return (best_node);
 }
 
-void    push_to_stack(t_list **s_a, t_list **s_b, char a_b)
+void	push_to_stack(t_list **s_a, t_list **s_b, char a_b)
 {
-    if (a_b == 'b')
-        push_b(s_a, s_b);
-    else
-        push_a(s_a, s_b);
+	if (a_b == 'b')
+		push_b(s_a, s_b);
+	else
+		push_a(s_a, s_b);
 }
 
 void	move_node_b(t_list **s_a, t_list **s_b, t_list *node, char a_b)
@@ -198,8 +199,8 @@ void	move_node_b(t_list **s_a, t_list **s_b, t_list *node, char a_b)
 	target = node->target_node;
 	while (node->position != 0 || target->position != 0)
 	{
-		up_down_a = up_or_down(s_b, node);
-		up_down_b = up_or_down(s_a, target);
+		up_down_a = up_or_down(s_a, node);
+		up_down_b = up_or_down(s_b, target);
 		if (up_down_a == 1 && up_down_b == 1)
 			rotate_both(s_a, s_b);
 		else if (up_down_a == -1 && up_down_b == -1)
@@ -213,12 +214,12 @@ void	move_node_b(t_list **s_a, t_list **s_b, t_list *node, char a_b)
 		else if (up_down_b == -1)
 			reverse_rotate_b(s_b);
 	}
-    push_to_stack(s_a, s_b, a_b);
+	push_to_stack(s_a, s_b, a_b);
 }
 
 void	move_node_a(t_list **s_a, t_list **s_b, t_list *node, char a_b)
 {
-    t_list	*target;
+	t_list	*target;
 	int		up_down_a;
 	int		up_down_b;
 
@@ -240,10 +241,10 @@ void	move_node_a(t_list **s_a, t_list **s_b, t_list *node, char a_b)
 		else if (up_down_b == -1)
 			reverse_rotate_b(s_b);
 	}
-    push_to_stack(s_a, s_b, a_b);
+	push_to_stack(s_a, s_b, a_b);
 }
 
-void	sort_stack_pushb(t_list **s_a, t_list **s_b)
+void	sort_stack_pushb(t_list **s_a, t_list **s_b /* int argc */)
 {
 	int		size;
 	t_list	*node;
@@ -252,81 +253,171 @@ void	sort_stack_pushb(t_list **s_a, t_list **s_b)
 	while (size > 3)
 	{
 		node = select_node(s_a);
-		move_node_b(s_a, s_b, node, 'b');  // argc remove
+		move_node_b(s_a, s_b, node, 'b'); // argc remove
 		edit_lst_costs(s_a, s_b, 'b');
 		size--;
-	    // ft_print_lst(s_a, s_b, argc);
+		// ft_print_lst(s_a, s_b, argc);
+		// printf("=====\n");
 	}
-    ft_sort_3(s_a);
+	ft_sort_3(s_a);
 }
 
-// t_list *select_node_pusha(t_list **s_a, t_list **s_b, t_list *node)
-// {
+void	sort_stack_pusha(t_list **s_a, t_list **s_b /* int argc */)
+{
+	t_list	*node;
+
+	while (*s_b)
+	{
+		node = select_node(s_b);
+		// printf("node %d target = %d \n", node->value,
+		// node->target_node->value);
+		move_node_a(s_a, s_b, node, 'a');
+		edit_lst_costs(s_a, s_b, 'a');
+		// ft_print_lst(s_a, s_b, argc);
+		// printf("=====\n");
+	}
+}
+
+void	final_order(t_list **stack)
+{
+	t_list	*lower_node;
+	t_list	*current;
+	int		size;
+	int		up;
+
+	size = ft_lstsize(stack);
+	current = *stack;
+	lower_node = *stack;
+	while (current)
+	{
+		if (lower_node->value > current->value)
+			lower_node = current;
+		current = current->next;
+	}
+	up = up_or_down(stack, lower_node);
+	while (lower_node->position != 0)
+	{
+		if (up)
+			rotate_a(stack);
+		else
+			reverse_rotate_a(stack);
+	}
+}
+
+t_list	*find_closest_index(t_list **stack, t_list *node)
+{
+	t_list	*current;
+	t_list	*closest;
+	int		distance;
+
+	current = *stack;
+	closest = ft_min_max(stack, 1);
+	distance = calc_distance(node->value, ft_min_max(stack, 1)->value);
+	while (current)
+	{
+		if (calc_distance(current->value, node->value) < distance
+			&& node->value < current->value)
+		{
+			distance = calc_distance(current->value, node->value);
+			closest = current;
+		}
+		current = current->next;
+	}
+    return (closest);
+}
+
+void	assign_index(t_list **stack)
+{
+	t_list	*min;
+	t_list	*closest;
+	int		i;
+	int		size;
+
+	min = ft_min_max(stack, 0);
+	min->index = 0;
+	size = ft_lstsize(stack);
+	i = 1;
+	while (i < size)
+	{
+		closest = find_closest_index(stack, min);
+		closest->index = i;
+		min = closest;
+		i++;
+	}
+}
+
+void    push_node_b(t_list **s_a, t_list **s_b, t_list *node)
+{
+    int node_direction;
     
-// }
-
-void    sort_stack_pusha(t_list **s_a, t_list **s_b)
-{
-    t_list *node;
-
-    while (*s_b)
+    node_direction = up_or_down(s_a, node);
+    if (node->position == 0)
+        return (push_b(s_a, s_b));
+    while (node->position != 0)
     {
-        node = select_node(s_b);
-        // printf("node %d target = %d \n", node->value, node->target_node->value);
-        move_node_a(s_a, s_b, node, 'a');
-        edit_lst_costs(s_a, s_b, 'a');
-	    // ft_print_lst(s_a, s_b, argc);
-        // printf("=====\n");`
+        if (node_direction == 1)
+            rotate_a(s_a);
+        else
+            reverse_rotate_a(s_a);
     }
+    push_b(s_a, s_b);
 }
 
-void    final_order(t_list **stack)
+void    push_chunks_b(t_list **s_a, t_list **s_b)
 {
-    t_list *lower_node;
     t_list *current;
-    int     size;
-    int     up;
+    int middle;
 
-    size = ft_lstsize(stack);
-    current = *stack;
-    lower_node = *stack;
+    middle = ft_lstsize(s_a) / 2;
+    printf("mid = %d\n", middle);
+    current = *s_a;
     while (current)
     {
-        if (lower_node->value > current->value)
-            lower_node = current;
-        current = current->next;
+        if (current->index < middle)
+        {
+            push_node_b(s_a, s_b, current);
+            current = *s_a;
+            continue;
+        }
+           current = current->next;
     }
-    up = up_or_down(stack, lower_node);
-    while (lower_node->position != 0)
-    {
-        if (up)
-            rotate_a(stack);
-        else
-            reverse_rotate_a(stack);
-    }
+    while (ft_lstsize(s_a) != 3)
+        push_b(s_a, s_b);
+    ft_sort_3(s_a);
 }
 
 int	main(int argc, char **argv)
 {
-	t_list *stack_a;
-	t_list *stack_b;
-    char    **args;
+	t_list	*stack_a;
+	t_list	*stack_b;
+	char	**args;
+    int     middle;
 
-	if (!args_checker(argc, argv))
+	args = args_checker(argc, argv);
+	if (!args)
 	{
 		printf("ERROR\n");
 		return (-1);
 	}
 	stack_a = init_stack(argc, argv);
 	stack_b = NULL;
-	push_b(&stack_a, &stack_b);
-	push_b(&stack_a, &stack_b);
-	// ft_print_lst(&stack_a, &stack_b, argc - 1);
-	edit_lst_costs(&stack_a, &stack_b, 'b');
-	sort_stack_pushb(&stack_a, &stack_b);
+	// push_b(&stack_a, &stack_b);
+	// push_b(&stack_a, &stack_b);
+	assign_index(&stack_a);
+    middle = ft_lstsize(&stack_a) / 2;
+    push_chunks_b(&stack_a, &stack_b);
 	edit_lst_costs(&stack_a, &stack_b, 'a');
-    sort_stack_pusha(&stack_a, &stack_b);
-    final_order(&stack_a);
+	sort_stack_pusha(&stack_a, &stack_b);
+	final_order(&stack_a);
+    
+
+
+
+	// ft_print_lst(&stack_a, &stack_b, argc - 1);
+	// edit_lst_costs(&stack_a, &stack_b, 'b');
+	// sort_stack_pushb(&stack_a, &stack_b /* argc - 1 */);
+	// ft_print_lst(&stack_a, &stack_b, argc - 1);
+	// ft_print_lst(&stack_a, &stack_b, argc - 1);
 	// ft_print_lst(&stack_a, &stack_b, argc - 1);
 	// ft_push_swap(&stack_a, &stack_b);
 	return (0);
