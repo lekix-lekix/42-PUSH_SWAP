@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:12:58 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/05 18:22:45 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/08 18:49:14 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,14 +269,84 @@ void	sort_stack_pusha(t_list **s_a, t_list **s_b /* int argc */)
 	while (*s_b)
 	{
 		node = select_node(s_b);
-		// printf("node %d target = %d \n", node->value,
-		// node->target_node->value);
 		move_node_a(s_a, s_b, node, 'a');
 		edit_lst_costs(s_a, s_b, 'a');
 		// ft_print_lst(s_a, s_b, argc);
 		// printf("=====\n");
 	}
 }
+
+
+t_list *select_chunk_node(t_list **stack, int nb)
+{
+    t_list	*current;
+	t_list	*best_node;
+
+	current = *stack;
+	best_node = *stack;
+	while (current)
+	{
+		if (current->chunk_nb == nb)
+			best_node = current;
+        
+		current = current->next;
+	}
+    while (current)
+    {
+        if (current->chunk_nb == nb && current->cost < best_node->cost)
+            best_node = current;
+    }
+	return (best_node);
+}
+
+int     is_chunk_done(t_list **stack, int chunk_nb)
+{
+    t_list *current;
+    
+    current = *stack;
+    while (current)
+    {
+        if (current->chunk_nb == chunk_nb)
+            return (0);
+        current = current->next;
+    }
+    return (1);
+}
+
+// void	sort_stack_pusha(t_list **s_a, t_list **s_b, int nb)
+// {
+// 	t_list	*node;
+
+// 	while (*s_b)
+// 	{
+// 		node = select_chunk_node(s_b, nb);
+// 		move_node_a(s_a, s_b, node, 'a');
+// 		edit_lst_costs(s_a, s_b, 'a');
+//         if (is_chunk_done(s_b, nb))
+//             nb--;
+// 		// ft_print_lst(s_a, s_b, argc);
+// 		// printf("=====\n");
+// 	}
+// }
+
+
+
+
+// void    sort_stack_pusha(t_list **s_a, t_list **s_b, int nb)
+// {
+//     t_list *node;
+//     int     i;
+
+//     i = nb;
+//     while (*s_b && i != 0)
+//     {
+//         node = select_chunk_node(s_b, nb);
+//         move_node_a(s_a, s_b, node, 'a');
+//         edit_lst_costs(s_a, s_b, 'a');
+//         if (is_chunk_done(s_a, i))
+//             i--;
+//     }
+// }
 
 void	final_order(t_list **stack)
 {
@@ -298,9 +368,9 @@ void	final_order(t_list **stack)
 	while (lower_node->position != 0)
 	{
 		if (up)
-			rotate_a(stack);
-		else
 			reverse_rotate_a(stack);
+		else
+			rotate_a(stack);
 	}
 }
 
@@ -323,7 +393,7 @@ t_list	*find_closest_index(t_list **stack, t_list *node)
 		}
 		current = current->next;
 	}
-    return (closest);
+	return (closest);
 }
 
 void	assign_index(t_list **stack)
@@ -346,44 +416,112 @@ void	assign_index(t_list **stack)
 	}
 }
 
-void    push_node_b(t_list **s_a, t_list **s_b, t_list *node)
+void	push_node_b(t_list **s_a, t_list **s_b, t_list *node)
 {
-    int node_direction;
-    
-    node_direction = up_or_down(s_a, node);
-    if (node->position == 0)
-        return (push_b(s_a, s_b));
-    while (node->position != 0)
-    {
-        if (node_direction == 1)
-            rotate_a(s_a);
-        else
-            reverse_rotate_a(s_a);
-    }
-    push_b(s_a, s_b);
+	int	node_direction;
+
+	node_direction = up_or_down(s_a, node);
+	if (node->position == 0)
+		return (push_b(s_a, s_b));
+	while (node->position != 0)
+	{
+		if (node_direction == 1)
+			rotate_a(s_a);
+		else
+			reverse_rotate_a(s_a);
+	}
+	push_b(s_a, s_b);
 }
 
-void    push_chunks_b(t_list **s_a, t_list **s_b)
+// void	push_chunks_b(t_list **s_a, t_list **s_b)
+// {
+// 	t_list	*current;
+// 	int		middle;
+
+// 	middle = ft_lstsize(s_a) / 2;
+// 	printf("mid = %d\n", middle);
+// 	current = *s_a;
+// 	while (current)
+// 	{
+// 		if (current->index < middle)
+// 		{
+// 			push_node_b(s_a, s_b, current);
+// 			current = *s_a;
+// 			continue ;
+// 		}
+// 		current = current->next;
+// 	}
+// 	while (ft_lstsize(s_a) != 3)
+// 		push_b(s_a, s_b);
+// 	ft_sort_3(s_a);
+// }
+
+void    push_chunks_b(t_list **s_a, t_list **s_b, int nb)
 {
     t_list *current;
-    int middle;
+    t_list *node;
+    int     chunk_size;
+    int     j;
+    int     i;
 
-    middle = ft_lstsize(s_a) / 2;
-    printf("mid = %d\n", middle);
+    i = 1;
+    j = 0;
     current = *s_a;
-    while (current)
+    chunk_size = ft_lstsize(s_a) / nb;
+    while (ft_lstsize(s_a) > 3)
     {
-        if (current->index < middle)
+        node = select_chunk_node(s_a, i);
+        // printf("node = %d target = %d\n", node->value, node->target_node->value);
+        // printf("node %d chunk %d\n", node->value, node->chunk_nb);
+        push_node_b(s_a, s_b, node);
+        j++;
+        if (j == chunk_size)
         {
-            push_node_b(s_a, s_b, current);
-            current = *s_a;
-            continue;
+            j = 0;
+            i++;
         }
-           current = current->next;
+        current = current->next;
+        if (!current)
+            current = *s_a;
+        edit_lst_costs(s_a, s_b, 'b');
     }
-    while (ft_lstsize(s_a) != 3)
-        push_b(s_a, s_b);
-    ft_sort_3(s_a);
+}
+
+int	last_chunk_size(int lst_size, int nb)
+{
+	if (lst_size % nb == 0)
+		return (lst_size / nb);
+	else
+		return (lst_size % nb);
+}
+
+void	assign_chunk_nb(t_list **s_a, int nb)
+{
+	t_list	*current;
+	int		chunk_size;
+    int     i;
+    int     j;
+
+    current = *s_a;
+	chunk_size = ft_lstsize(s_a) / nb;
+    i = 1;
+    j = 0;
+    while (i <= nb)
+    {
+        if (current->index < chunk_size * i && current->chunk_nb == -1)
+        {
+            current->chunk_nb = i;
+            j++;
+        }
+        if (j == chunk_size)
+        {
+            j = 0;
+            i++;
+        }
+        current = current->next;
+        if (!current)
+            current = *s_a;
+    }
 }
 
 int	main(int argc, char **argv)
@@ -391,7 +529,7 @@ int	main(int argc, char **argv)
 	t_list	*stack_a;
 	t_list	*stack_b;
 	char	**args;
-    int     middle;
+	// int		middle;
 
 	args = args_checker(argc, argv);
 	if (!args)
@@ -401,24 +539,20 @@ int	main(int argc, char **argv)
 	}
 	stack_a = init_stack(argc, argv);
 	stack_b = NULL;
-	// push_b(&stack_a, &stack_b);
-	// push_b(&stack_a, &stack_b);
+    push_b(&stack_a, &stack_b);
 	assign_index(&stack_a);
-    middle = ft_lstsize(&stack_a) / 2;
-    push_chunks_b(&stack_a, &stack_b);
+    assign_chunk_nb(&stack_a, 5);
+	edit_lst_costs(&stack_a, &stack_b, 'b');
+    push_chunks_b(&stack_a, &stack_b, 5);
+    ft_sort_3(&stack_a);
 	edit_lst_costs(&stack_a, &stack_b, 'a');
+    // ft_print_lst(&stack_a, &stack_b, argc - 1);
 	sort_stack_pusha(&stack_a, &stack_b);
-	final_order(&stack_a);
-    
-
-
-
-	// ft_print_lst(&stack_a, &stack_b, argc - 1);
-	// edit_lst_costs(&stack_a, &stack_b, 'b');
 	// sort_stack_pushb(&stack_a, &stack_b /* argc - 1 */);
-	// ft_print_lst(&stack_a, &stack_b, argc - 1);
-	// ft_print_lst(&stack_a, &stack_b, argc - 1);
-	// ft_print_lst(&stack_a, &stack_b, argc - 1);
+	// middle = ft_lstsize(&stack_a) / 2;
+	// push_chunks_b(&stack_a, &stack_b);
+	final_order(&stack_a);
+	// edit_lst_costs(&stack_a, &stack_b, 'b');
 	// ft_push_swap(&stack_a, &stack_b);
 	return (0);
 }

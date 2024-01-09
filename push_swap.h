@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:15:14 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/05 15:41:05 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/08 13:46:29 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_list
 	int				position;
     int             index;
 	int				cost;
+    int             chunk_nb;
 	struct s_list	*target_node;
 	struct s_list	*next;
 }					t_list;

@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:39:59 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/05 17:49:51 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:00:48 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_list  *ft_lstnew(int nb, int pos)
     new_node->value = nb;
     new_node->position = pos;
     new_node->index = -1;
+    new_node->chunk_nb = -1;
     new_node->target_node = NULL;
     new_node->next = NULL;
     return (new_node);
@@ -89,7 +90,7 @@ void    ft_print_lst(t_list **stack_a, t_list **stack_b, int elems)
     {
         if (current_a)
         {
-            printf("%d, index = %d", current_a->value, current_a->index);
+            printf("%d, chunk = %d\n", current_a->value, current_a->chunk_nb);
             current_a = current_a->next;
         }
         else
@@ -97,7 +98,7 @@ void    ft_print_lst(t_list **stack_a, t_list **stack_b, int elems)
         printf("            ");
         if (current_b)
         {
-            printf("%d, index = %d\n", current_b->value, current_b->index);
+            printf("%d, target = %d, chunk = %d\n", current_b->value, current_b->target_node->value, current_b->chunk_nb);
             current_b = current_b->next;
         }
         else
