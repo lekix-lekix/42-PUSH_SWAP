@@ -1,6 +1,8 @@
 {
-    "files.associations": {
-        "unistd.h": "c",
-        "random": "c"
-    }
+  "files.associations": {
+    "*.embeddedhtml": "html",
+    "unistd.h": "c",
+    "random": "c",
+    "regex": "c"
+  }
 }

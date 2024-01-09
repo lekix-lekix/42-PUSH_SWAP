@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lekix <lekix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:12:58 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/08 18:49:14 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:45:32 by lekix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,90 +80,122 @@ int	up_or_down(t_list **stack, t_list *node)
 		return (-1);
 }
 
-void	calc_cost(t_list *node, t_list **s_a, t_list **s_b)
+// void	calc_cost(t_list *node, t_list **s_a, t_list **s_b)
+// {
+// 	int		size_a;
+// 	int		size_b;
+// 	int		cost_node;
+// 	int		cost_target;
+// 	t_list	*target;
+
+// 	size_a = ft_lstsize(s_a);
+// 	size_b = ft_lstsize(s_b);
+// 	cost_node = 0;
+// 	cost_target = 0;
+// 	target = node->target_node;
+// 	if (up_or_down(s_a, node) == 1 || !up_or_down(s_a, node))
+// 		cost_node += node->position;
+// 	else
+// 		node->cost += size_a - node->position;
+// 	if (up_or_down(s_b, target) == 1 || !up_or_down(s_b, target))
+// 		node->cost += target->position;
+// 	else
+// 		node->cost += size_b - target->position;
+// 	if (up_or_down(s_a, node) == up_or_down(s_b, target))
+// 	{
+// 		if (node->cost)
+// 	}
+// }
+
+void	calc_cost(t_list **s_a, t_list **s_b)
 {
-	int		size_a;
-	int		size_b;
+	t_list	*current;
 	t_list	*target;
+	int		ppdc;
 
-	size_a = ft_lstsize(s_a);
-	size_b = ft_lstsize(s_b);
-	target = node->target_node;
-	if (up_or_down(s_a, node) == 1 || !up_or_down(s_a, node))
-		node->cost += node->position;
-	else
-		node->cost += size_a - node->position;
-	if (up_or_down(s_b, target) == 1 || !up_or_down(s_b, target))
-		node->cost += target->position;
-	else
-		node->cost += size_b - target->position;
-}
-
-void	edit_cost_target_pushb(t_list **s_a, t_list **s_b, t_list *node)
-{
-	t_list	*min;
-	t_list	*max;
-
-	min = ft_min_max(s_b, 0);
-	max = ft_min_max(s_b, 1);
-	node->cost = 0;
-	if (node->value < min->value || node->value > max->value)
+	current = *s_b;
+	while (current)
 	{
-		node->target_node = max;
-		calc_cost(node, s_a, s_b);
-	}
-	else
-	{
-		node->target_node = find_target_node_b(s_b, node);
-		calc_cost(node, s_a, s_b);
+		target = current->target_node;
+		if (current->cost < target->cost)
+			ppdc = current->cost;
+		else
+			ppdc = target->cost;
+		if (up_or_down(s_b, current) == up_or_down(s_a, target))
+			current->cost += target->cost - ppdc;
+		else
+			current->cost += target->cost;
+		current = current->next;
 	}
 }
 
-void	edit_cost_target_pusha(t_list **s_a, t_list **s_b, t_list *node)
+void	calc_cost_first_pos(t_list **stack)
+{
+	t_list	*current;
+	int		up_down;
+
+	current = *stack;
+	while (current)
+	{
+		current->cost = 0;
+		up_down = up_or_down(stack, current);
+		if (up_down == 1 || up_down == 0)
+			current->cost += current->position;
+		else
+			current->cost += ft_lstsize(stack) - current->position;
+		current = current->next;
+	}
+}
+
+void	set_targets(t_list **s_a, t_list **s_b)
 {
 	t_list	*min;
 	t_list	*max;
+	t_list	*current;
 
 	min = ft_min_max(s_a, 0);
 	max = ft_min_max(s_a, 1);
-	node->cost = 0;
-	if (node->value < min->value || node->value > max->value)
+	current = *s_b;
+	while (current)
 	{
-		node->target_node = min;
-		calc_cost(node, s_b, s_a);
+		if (current->value < min->value || current->value > max->value)
+			current->target_node = min;
+		else
+			current->target_node = find_target_node_a(s_a, current);
+		current = current->next;
 	}
-	else
-	{
-		// printf("Coucou\n");
-		node->target_node = find_target_node_a(s_a, node);
-		calc_cost(node, s_b, s_a);
-	}
-	// printf("node = %d target = %d pos = %d\n", node->value,
-	// node->target_node->value, node->position);
 }
 
-void	edit_lst_costs(t_list **s_a, t_list **s_b, char a_b)
-{
-	t_list	*current;
+// void	edit_lst_costs(t_list **s_a, t_list **s_b, char a_b)
+// {
+// 	t_list	*current;
 
-	if (a_b == 'b')
-	{
-		current = *s_a;
-		while (current)
-		{
-			edit_cost_target_pushb(s_a, s_b, current);
-			current = current->next;
-		}
-	}
-	else
-	{
-		current = *s_b;
-		while (current)
-		{
-			edit_cost_target_pusha(s_a, s_b, current);
-			current = current->next;
-		}
-	}
+// 	if (a_b == 'b')
+// 	{
+// 		current = *s_a;
+// 		while (current)
+// 		{
+// 			edit_cost_target_pushb(s_a, s_b, current);
+// 			current = current->next;
+// 		}
+// 	}
+// 	else
+// 	{
+// 		current = *s_b;
+// 		while (current)
+// 		{
+// 			set_targets(s_a, s_b, current);
+// 			current = current->next;
+// 		}
+// 	}
+// }
+
+void	edit_lst_costs(t_list **s_a, t_list **s_b)
+{
+	calc_cost_first_pos(s_a);
+	calc_cost_first_pos(s_b);
+	set_targets(s_a, s_b);
+	calc_cost(s_a, s_b);
 }
 
 t_list	*select_node(t_list **stack)
@@ -200,7 +232,9 @@ void	move_node_b(t_list **s_a, t_list **s_b, t_list *node, char a_b)
 	while (node->position != 0 || target->position != 0)
 	{
 		up_down_a = up_or_down(s_a, node);
+		// printf("ud a = %d\n", up_down_a);
 		up_down_b = up_or_down(s_b, target);
+		// printf("ud b = %d\n", up_down_b);
 		if (up_down_a == 1 && up_down_b == 1)
 			rotate_both(s_a, s_b);
 		else if (up_down_a == -1 && up_down_b == -1)
@@ -250,11 +284,11 @@ void	sort_stack_pushb(t_list **s_a, t_list **s_b /* int argc */)
 	t_list	*node;
 
 	size = ft_lstsize(s_a);
-	while (size > 3)
+	while (size > 2)
 	{
 		node = select_node(s_a);
 		move_node_b(s_a, s_b, node, 'b'); // argc remove
-		edit_lst_costs(s_a, s_b, 'b');
+		edit_lst_costs(s_a, s_b);
 		size--;
 		// ft_print_lst(s_a, s_b, argc);
 		// printf("=====\n");
@@ -262,24 +296,23 @@ void	sort_stack_pushb(t_list **s_a, t_list **s_b /* int argc */)
 	ft_sort_3(s_a);
 }
 
-void	sort_stack_pusha(t_list **s_a, t_list **s_b /* int argc */)
+// void	sort_stack_pusha(t_list **s_a, t_list **s_b /* int argc */)
+// {
+// 	t_list	*node;
+
+// 	while (*s_b)
+// 	{
+// 		node = select_node(s_b);
+// 		move_node_a(s_a, s_b, node, 'a');
+// 		edit_lst_costs(s_a, s_b, 'a');
+// 		// ft_print_lst(s_a, s_b, argc);
+// 		// printf("=====\n");
+// 	}
+// }
+
+t_list	*select_best_node(t_list **stack, int nb)
 {
-	t_list	*node;
-
-	while (*s_b)
-	{
-		node = select_node(s_b);
-		move_node_a(s_a, s_b, node, 'a');
-		edit_lst_costs(s_a, s_b, 'a');
-		// ft_print_lst(s_a, s_b, argc);
-		// printf("=====\n");
-	}
-}
-
-
-t_list *select_chunk_node(t_list **stack, int nb)
-{
-    t_list	*current;
+	t_list	*current;
 	t_list	*best_node;
 
 	current = *stack;
@@ -288,49 +321,48 @@ t_list *select_chunk_node(t_list **stack, int nb)
 	{
 		if (current->chunk_nb == nb)
 			best_node = current;
-        
 		current = current->next;
 	}
-    while (current)
-    {
-        if (current->chunk_nb == nb && current->cost < best_node->cost)
-            best_node = current;
-    }
+	current = *stack;
+	while (current)
+	{
+		if (current->chunk_nb == nb && current->cost < best_node->cost)
+			best_node = current;
+		current = current->next;
+	}
 	return (best_node);
 }
 
-int     is_chunk_done(t_list **stack, int chunk_nb)
+int	is_chunk_done(t_list **stack, int chunk_nb)
 {
-    t_list *current;
-    
-    current = *stack;
-    while (current)
-    {
-        if (current->chunk_nb == chunk_nb)
-            return (0);
-        current = current->next;
-    }
-    return (1);
+	t_list	*current;
+
+	current = *stack;
+	while (current)
+	{
+		if (current->chunk_nb == chunk_nb)
+			return (0);
+		current = current->next;
+	}
+	return (1);
 }
 
-// void	sort_stack_pusha(t_list **s_a, t_list **s_b, int nb)
-// {
-// 	t_list	*node;
+void	sort_stack_pusha(t_list **s_a, t_list **s_b, int nb, int argc)
+{
+	t_list	*node;
 
-// 	while (*s_b)
-// 	{
-// 		node = select_chunk_node(s_b, nb);
-// 		move_node_a(s_a, s_b, node, 'a');
-// 		edit_lst_costs(s_a, s_b, 'a');
-//         if (is_chunk_done(s_b, nb))
-//             nb--;
-// 		// ft_print_lst(s_a, s_b, argc);
-// 		// printf("=====\n");
-// 	}
-// }
-
-
-
+	(void)argc;
+	while (*s_b)
+	{
+		node = select_best_node(s_b, nb);
+		move_node_a(s_a, s_b, node, 'a');
+		edit_lst_costs(s_a, s_b);
+		if (is_chunk_done(s_b, nb))
+			nb--;
+		// ft_print_lst(s_a, s_b, argc);
+		// printf("=====\n");
+	}
+}
 
 // void    sort_stack_pusha(t_list **s_a, t_list **s_b, int nb)
 // {
@@ -351,26 +383,45 @@ int     is_chunk_done(t_list **stack, int chunk_nb)
 void	final_order(t_list **stack)
 {
 	t_list	*lower_node;
-	t_list	*current;
 	int		size;
-	int		up;
 
 	size = ft_lstsize(stack);
-	current = *stack;
-	lower_node = *stack;
-	while (current)
-	{
-		if (lower_node->value > current->value)
-			lower_node = current;
-		current = current->next;
-	}
-	up = up_or_down(stack, lower_node);
+	lower_node = ft_min_max(stack, 0);
 	while (lower_node->position != 0)
 	{
-		if (up)
-			reverse_rotate_a(stack);
-		else
+		if (lower_node->position <= size / 2)
 			rotate_a(stack);
+		else
+			reverse_rotate_a(stack);
+	}
+}
+
+void	assign_chunk_nb(t_list **s_a, int nb)
+{
+	t_list	*current;
+	int		chunk_size;
+	int		i;
+	int		j;
+
+	current = *s_a;
+	chunk_size = ft_lstsize(s_a) / nb;
+	i = 1;
+	j = 0;
+	while (i <= nb)
+	{
+		if (current->index < chunk_size * i && current->chunk_nb == -1)
+		{
+			current->chunk_nb = i;
+			j++;
+		}
+		if (j == chunk_size)
+		{
+			j = 0;
+			i++;
+		}
+		current = current->next;
+		if (!current)
+			current = *s_a;
 	}
 }
 
@@ -435,9 +486,6 @@ void	push_node_b(t_list **s_a, t_list **s_b, t_list *node)
 
 // void	push_chunks_b(t_list **s_a, t_list **s_b)
 // {
-// 	t_list	*current;
-// 	int		middle;
-
 // 	middle = ft_lstsize(s_a) / 2;
 // 	printf("mid = %d\n", middle);
 // 	current = *s_a;
@@ -456,72 +504,36 @@ void	push_node_b(t_list **s_a, t_list **s_b, t_list *node)
 // 	ft_sort_3(s_a);
 // }
 
-void    push_chunks_b(t_list **s_a, t_list **s_b, int nb)
-{
-    t_list *current;
-    t_list *node;
-    int     chunk_size;
-    int     j;
-    int     i;
-
-    i = 1;
-    j = 0;
-    current = *s_a;
-    chunk_size = ft_lstsize(s_a) / nb;
-    while (ft_lstsize(s_a) > 3)
-    {
-        node = select_chunk_node(s_a, i);
-        // printf("node = %d target = %d\n", node->value, node->target_node->value);
-        // printf("node %d chunk %d\n", node->value, node->chunk_nb);
-        push_node_b(s_a, s_b, node);
-        j++;
-        if (j == chunk_size)
-        {
-            j = 0;
-            i++;
-        }
-        current = current->next;
-        if (!current)
-            current = *s_a;
-        edit_lst_costs(s_a, s_b, 'b');
-    }
-}
-
-int	last_chunk_size(int lst_size, int nb)
-{
-	if (lst_size % nb == 0)
-		return (lst_size / nb);
-	else
-		return (lst_size % nb);
-}
-
-void	assign_chunk_nb(t_list **s_a, int nb)
+void	push_chunks_b(t_list **s_a, t_list **s_b, int nb)
 {
 	t_list	*current;
+	t_list	*node;
 	int		chunk_size;
-    int     i;
-    int     j;
+	int		j;
+	int		i;
 
-    current = *s_a;
+	i = 1;
+	j = 0;
+	current = *s_a;
 	chunk_size = ft_lstsize(s_a) / nb;
-    i = 1;
-    j = 0;
-    while (i <= nb)
-    {
-        if (current->index < chunk_size * i && current->chunk_nb == -1)
-        {
-            current->chunk_nb = i;
-            j++;
-        }
-        if (j == chunk_size)
-        {
-            j = 0;
-            i++;
-        }
-        current = current->next;
-        if (!current)
-            current = *s_a;
-    }
+	while (ft_lstsize(s_a) > 3)
+	{
+		node = select_best_node(s_a, i);
+		// printf("node = %d target = %d\n", node->value,
+		// node->target_node->value);
+		// printf("node %d chunk %d\n", node->value, node->chunk_nb);
+		push_node_b(s_a, s_b, node);
+		j++;
+		if (j == chunk_size)
+		{
+			j = 0;
+			i++;
+		}
+		current = current->next;
+		if (!current)
+			current = *s_a;
+		calc_cost_first_pos(s_a);
+	}
 }
 
 int	main(int argc, char **argv)
@@ -529,8 +541,8 @@ int	main(int argc, char **argv)
 	t_list	*stack_a;
 	t_list	*stack_b;
 	char	**args;
-	// int		middle;
 
+	// int		middle;
 	args = args_checker(argc, argv);
 	if (!args)
 	{
@@ -539,15 +551,15 @@ int	main(int argc, char **argv)
 	}
 	stack_a = init_stack(argc, argv);
 	stack_b = NULL;
-    push_b(&stack_a, &stack_b);
 	assign_index(&stack_a);
-    assign_chunk_nb(&stack_a, 5);
-	edit_lst_costs(&stack_a, &stack_b, 'b');
-    push_chunks_b(&stack_a, &stack_b, 5);
-    ft_sort_3(&stack_a);
-	edit_lst_costs(&stack_a, &stack_b, 'a');
-    // ft_print_lst(&stack_a, &stack_b, argc - 1);
-	sort_stack_pusha(&stack_a, &stack_b);
+	assign_chunk_nb(&stack_a, 11);
+	calc_cost_first_pos(&stack_a);
+	push_chunks_b(&stack_a, &stack_b, 11);
+	ft_sort_3(&stack_a);
+	edit_lst_costs(&stack_a, &stack_b);
+	// ft_print_lst(&stack_a, &stack_b, argc - 1);
+	sort_stack_pusha(&stack_a, &stack_b, 11, argc - 1);
+	// ft_print_lst(&stack_a, &stack_b, argc - 1);
 	// sort_stack_pushb(&stack_a, &stack_b /* argc - 1 */);
 	// middle = ft_lstsize(&stack_a) / 2;
 	// push_chunks_b(&stack_a, &stack_b);
