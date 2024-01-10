@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lekix <lekix@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:12:58 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/09 18:45:32 by lekix            ###   ########.fr       */
+/*   Updated: 2024/01/10 18:23:28 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -484,26 +484,6 @@ void	push_node_b(t_list **s_a, t_list **s_b, t_list *node)
 	push_b(s_a, s_b);
 }
 
-// void	push_chunks_b(t_list **s_a, t_list **s_b)
-// {
-// 	middle = ft_lstsize(s_a) / 2;
-// 	printf("mid = %d\n", middle);
-// 	current = *s_a;
-// 	while (current)
-// 	{
-// 		if (current->index < middle)
-// 		{
-// 			push_node_b(s_a, s_b, current);
-// 			current = *s_a;
-// 			continue ;
-// 		}
-// 		current = current->next;
-// 	}
-// 	while (ft_lstsize(s_a) != 3)
-// 		push_b(s_a, s_b);
-// 	ft_sort_3(s_a);
-// }
-
 void	push_chunks_b(t_list **s_a, t_list **s_b, int nb)
 {
 	t_list	*current;
@@ -519,9 +499,6 @@ void	push_chunks_b(t_list **s_a, t_list **s_b, int nb)
 	while (ft_lstsize(s_a) > 3)
 	{
 		node = select_best_node(s_a, i);
-		// printf("node = %d target = %d\n", node->value,
-		// node->target_node->value);
-		// printf("node %d chunk %d\n", node->value, node->chunk_nb);
 		push_node_b(s_a, s_b, node);
 		j++;
 		if (j == chunk_size)
@@ -536,35 +513,88 @@ void	push_chunks_b(t_list **s_a, t_list **s_b, int nb)
 	}
 }
 
+void	ft_sort_5(t_list **s_a, t_list **s_b)
+{
+	t_list	*node;
+
+	push_b(s_a, s_b);
+	push_b(s_a, s_b);
+	ft_sort_3(s_a);
+	if ((*s_b)->value < (*s_b)->next->value)
+		swap_b(s_b);
+	// ft_print_lst(s_a, s_b, 5);
+	while (*s_b)
+	{
+		edit_lst_costs(s_a, s_b);
+		set_targets(s_a, s_b);
+		node = *s_b;
+		move_node_a(s_a, s_b, node, 'a');
+	}
+}
+
+void	ft_sort_big(t_list **s_a, t_list **s_b, int nb)
+{
+	int	chunk_nb;
+
+	if (ft_lstsize(s_a) <= 100)
+		chunk_nb = 1;
+	else
+		chunk_nb = 5;
+	assign_chunk_nb(s_a, chunk_nb);
+	calc_cost_first_pos(s_a);
+	calc_cost_first_pos(s_b);
+	push_chunks_b(s_a, s_b, chunk_nb);
+	ft_sort_3(s_a);
+	edit_lst_costs(s_a, s_b);
+	sort_stack_pusha(s_a, s_b, chunk_nb, nb);
+}
+
+void	pick_an_algo(t_list **s_a, t_list **s_b, int nb)
+{
+	assign_index(s_a);
+	if (nb == 2)
+		ft_sort_2(s_a);
+	else if (nb == 3)
+		ft_sort_3(s_a);
+	else if (nb == 5)
+		ft_sort_5(s_a, s_b);
+	else
+		ft_sort_big(s_a, s_b, nb);
+	final_order(s_a);
+}
+
+void	ft_free_lst(t_list **stack)
+{
+	t_list	*current;
+	t_list	*next;
+
+	current = *stack;
+	while (current)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	*stack_a;
 	t_list	*stack_b;
 	char	**args;
 
-	// int		middle;
 	args = args_checker(argc, argv);
 	if (!args)
 	{
-		printf("ERROR\n");
+		printf("Error\n");
 		return (-1);
 	}
 	stack_a = init_stack(argc, argv);
 	stack_b = NULL;
-	assign_index(&stack_a);
-	assign_chunk_nb(&stack_a, 11);
-	calc_cost_first_pos(&stack_a);
-	push_chunks_b(&stack_a, &stack_b, 11);
-	ft_sort_3(&stack_a);
-	edit_lst_costs(&stack_a, &stack_b);
-	// ft_print_lst(&stack_a, &stack_b, argc - 1);
-	sort_stack_pusha(&stack_a, &stack_b, 11, argc - 1);
-	// ft_print_lst(&stack_a, &stack_b, argc - 1);
-	// sort_stack_pushb(&stack_a, &stack_b /* argc - 1 */);
-	// middle = ft_lstsize(&stack_a) / 2;
-	// push_chunks_b(&stack_a, &stack_b);
-	final_order(&stack_a);
-	// edit_lst_costs(&stack_a, &stack_b, 'b');
-	// ft_push_swap(&stack_a, &stack_b);
+	if (ft_verify_sort(&stack_a))
+		return (0);
+	pick_an_algo(&stack_a, &stack_b, argc - 1);
+	// ft_free_lst(&stack_a);
+	// ft_print_lst(&stack_a, &stack_b, argc -1);
 	return (0);
 }

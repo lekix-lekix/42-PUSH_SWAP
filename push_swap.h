@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lekix <lekix@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:15:14 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/09 11:17:44 by lekix            ###   ########.fr       */
+/*   Updated: 2024/01/10 17:12:29 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ typedef struct s_list
 {
 	int				value;
 	int				position;
-    int             index;
+	int				index;
 	int				cost;
-    int             chunk_nb;
+	int				chunk_nb;
 	struct s_list	*target_node;
 	struct s_list	*next;
 }					t_list;
@@ -58,5 +58,7 @@ int					find_node_position(t_list **stack, int nb);
 t_list				*find_target_node_pos(t_list **stack, t_list *node);
 void				edit_cost_target(t_list **s_a, t_list **s_b, t_list *node);
 void				ft_sort_3(t_list **stack_a);
+int					ft_verify_sort(t_list **stack);
+void				ft_sort_2(t_list **stack_a);
 
 #endif

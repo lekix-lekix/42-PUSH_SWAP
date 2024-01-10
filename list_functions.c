@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lekix <lekix@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:39:59 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/09 18:25:17 by lekix            ###   ########.fr       */
+/*   Updated: 2024/01/10 17:31:04 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	ft_print_lst(t_list **stack_a, t_list **stack_b, int elems)
 		printf("            ");
 		if (current_b)
 		{
-			printf("%d target %dcost = %d\n", current_b->value, current_b->target_node->value, current_b->cost);
+			printf("%d\n", current_b->value);
 			current_b = current_b->next;
 		}
 		else
