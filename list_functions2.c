@@ -6,13 +6,13 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 13:43:24 by kipouliq          #+#    #+#             */
-/*   Updated: 2023/12/29 18:52:27 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/11 17:51:30 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./push_swap.h"
 
-int     ft_lstsize(t_list **lst)
+int     ft_listsize(t_list **lst)
 {
 	int	    size;
     t_list  *current;

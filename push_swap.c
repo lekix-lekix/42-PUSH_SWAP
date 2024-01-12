@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 14:08:51 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/04 16:41:07 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/11 17:51:34 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	ft_push_swap(t_list **stack_a, t_list **stack_b)
 {
 	int	lst_size;
 
-	lst_size = ft_lstsize(stack_a);
+	lst_size = ft_listsize(stack_a);
 	if (!lst_size || lst_size == 1)
 		return ;
 	if (lst_size == 2)

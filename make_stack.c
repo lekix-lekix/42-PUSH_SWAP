@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:28:13 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/04 16:13:42 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:44:51 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	swap(t_list **stack)
 	t_list	*tmp;
     int     lst_size;
 
-    lst_size = ft_lstsize(stack); 
+    lst_size = ft_listsize(stack); 
 	if (!*stack || !lst_size || lst_size == 1)
 		return ;
 	tmp = *stack;
@@ -62,7 +62,7 @@ void	reverse_rotate(t_list **stack)
 	prev->next = NULL;
 }
 
-void	push_a(t_list **stack_a, t_list **stack_b)
+void	push_a(t_list **stack_a, t_list **stack_b, int print)
 {
 	t_list	*head_a;
 	t_list	*head_b;
@@ -85,10 +85,11 @@ void	push_a(t_list **stack_a, t_list **stack_b)
 	}
     recalculate_position(stack_a);
     recalculate_position(stack_b);
-	ft_printf("pa\n");
+    if (print)
+	    ft_printf("pa\n");
 }
 
-void	push_b(t_list **stack_a, t_list **stack_b)
+void	push_b(t_list **stack_a, t_list **stack_b, int print)
 {
 	t_list	*head_a;
 	t_list	*head_b;
@@ -111,23 +112,6 @@ void	push_b(t_list **stack_a, t_list **stack_b)
 	}
     recalculate_position(stack_a);
     recalculate_position(stack_b);
-	ft_printf("pb\n");
+    if (print)
+	    ft_printf("pb\n");
 }
-
-// int	main(int argc, char **argv)
-// {
-// 	t_list	*stack_a;
-// 	t_list	*stack_b;
-
-// 	if (!args_checker(argc, argv))
-// 	{
-// 		printf("ERROR\n");
-// 		return (-1);
-// 	}
-// 	stack_a = init_stack(argc, argv);
-// 	stack_b = NULL;
-//     ft_push_swap(&stack_a, &stack_b);
-//     return (0);
-// }
-
-// SIGSEV avec 1 / 0 element

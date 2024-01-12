@@ -3,6 +3,7 @@
     "*.embeddedhtml": "html",
     "unistd.h": "c",
     "random": "c",
-    "regex": "c"
-  }
+    "regex": "c",
+    "sstream": "c"
+}
 }
