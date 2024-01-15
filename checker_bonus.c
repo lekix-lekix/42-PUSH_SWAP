@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 10:39:04 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/12 18:54:19 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:45:33 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,27 @@ void    exec_op(t_list **s_a, t_list **s_b, char *str)
         return (reverse_rotate_both(s_a, s_b, 0));
 }
 
-void    get_instructions(t_list **s_a, t_list **s_b)
+int    get_instructions(t_list **s_a, t_list **s_b)
 {
 	char	*str;
 	int		i;
 
-	str = get_next_line(1, 0);
 	i = -1;
-	while (1)
+    str = get_next_line(0, 0);
+	while (str)
 	{
 		if (!check_op(str))
 		{
+            get_next_line(0, 1);
 			ft_printf("Error\n");
-            return ;
+            free(str);
+            return (-1);
 		}
         exec_op(s_a, s_b, str);
-        get_next_line(0, 1);
-	}
+        free(str);
+	    str = get_next_line(0, 0);
+    }
+    return (0);
 }
 
 int	main(int argc, char **argv)
@@ -77,6 +81,8 @@ int	main(int argc, char **argv)
     t_list  *stack_a;
     t_list  *stack_b;
     char    **args;
+    int     check_op;
+    int     sorted;
 
 	argc -= 1;
     args = args_checker(argc, argv);
@@ -87,5 +93,14 @@ int	main(int argc, char **argv)
 	}
     stack_a = init_stack(argc, argv);
 	stack_b = NULL;
-    get_instructions(&stack_a, &stack_b);
+    check_op = get_instructions(&stack_a, &stack_b);
+    sorted = ft_verify_sort(&stack_a);
+    ft_free_stack(&stack_a);
+    ft_free_stack(&stack_b);
+    if (check_op == -1)
+        return (0);
+    else if (sorted)
+        return (ft_printf("OK\n"));
+    else
+        return (ft_printf("KO\n"));
 }

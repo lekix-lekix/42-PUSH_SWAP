@@ -6,7 +6,7 @@
 #    By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/18 12:11:49 by kipouliq          #+#    #+#              #
-#    Updated: 2024/01/12 18:32:45 by kipouliq         ###   ########.fr        #
+#    Updated: 2024/01/15 14:08:33 by kipouliq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRCS_BONUS = list_functions.c \
 		make_stack.c \
 		args_parsing.c \
 		args_parsing2.c \
-		checker_bonus.c
+		checker_bonus.c \
+		push_swap.c
 
 OBJ = $(SRC:.c=.o)
 
