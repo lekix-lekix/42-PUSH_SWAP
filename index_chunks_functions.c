@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:19:10 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/16 13:25:58 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:08:16 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,4 +125,3 @@ int	is_chunk_done(t_list **stack, int chunk_nb)
 	}
 	return (1);
 }
-

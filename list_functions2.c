@@ -6,21 +6,21 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 13:43:24 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/11 17:51:30 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:08:21 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./push_swap.h"
 
-int     ft_listsize(t_list **lst)
+int	ft_listsize(t_list **lst)
 {
-	int	    size;
-    t_list  *current;
+	int		size;
+	t_list	*current;
 
 	if (!*lst)
 		return (0);
 	size = 0;
-    current = *lst;
+	current = *lst;
 	while (current)
 	{
 		current = current->next;
@@ -29,31 +29,31 @@ int     ft_listsize(t_list **lst)
 	return (size);
 }
 
-void    recalculate_position(t_list **stack)
+void	recalculate_position(t_list **stack)
 {
-    t_list *current;
-    int     i;
+	t_list	*current;
+	int		i;
 
-    i = 0;
-    current = *stack;
-    while (current)
-    {
-        current->position = i;
-        i++;
-        current = current->next;
-    }
+	i = 0;
+	current = *stack;
+	while (current)
+	{
+		current->position = i;
+		i++;
+		current = current->next;
+	}
 }
 
-int     find_node_position(t_list **stack, int nb)
+int	find_node_position(t_list **stack, int nb)
 {
-    t_list *current;
+	t_list	*current;
 
-    current = *stack;
-    while (current)
-    {
-        if (current->value == nb)
-            return (current->position);
-        current = current->next;
-    }
-    return (-1);
+	current = *stack;
+	while (current)
+	{
+		if (current->value == nb)
+			return (current->position);
+		current = current->next;
+	}
+	return (-1);
 }

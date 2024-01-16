@@ -6,27 +6,11 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:40:31 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/16 13:48:34 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:11:00 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./push_swap.h"
-
-void	final_order(t_list **stack)
-{
-	t_list	*lower_node;
-	int		size;
-
-	size = ft_listsize(stack);
-	lower_node = ft_min_max(stack, 0);
-	while (lower_node->position != 0)
-	{
-		if (lower_node->position <= size / 2)
-			rotate_a(stack);
-		else
-			reverse_rotate_a(stack);
-	}
-}
 
 void	ft_sort_2(t_list **stack_a)
 {
@@ -64,6 +48,14 @@ void	ft_sort_3(t_list **stack_a)
 	}
 }
 
+void	ft_sort_4(t_list **stack_a, t_list **stack_b)
+{
+	push_b(stack_a, stack_b, 1);
+	ft_sort_3(stack_a);
+	set_targets(stack_a, stack_b);
+	move_node_a(stack_a, stack_b, *stack_b);
+}
+
 void	ft_sort_5(t_list **s_a, t_list **s_b)
 {
 	t_list	*node;
@@ -98,4 +90,3 @@ void	ft_sort_big(t_list **s_a, t_list **s_b)
 	edit_list_costs(s_a, s_b);
 	sort_stack_pusha(s_a, s_b, chunk_nb);
 }
-

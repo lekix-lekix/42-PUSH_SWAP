@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cost_target.c                                      :+:      :+:    :+:   */
+/*   cost_target_functions.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:04:18 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/16 13:15:08 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:16:19 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ t_list	*find_target_node_a(t_list **stack, t_list *node)
 	}
 	return (closest);
 }
+
 void	set_targets(t_list **s_a, t_list **s_b)
 {
 	t_list	*min;

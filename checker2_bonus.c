@@ -1,12 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   args_parsing2.c                                    :+:      :+:    :+:   */
+/*   checker2_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/22 17:52:59 by kipouliq          #+#    #+#             */
-/*   Updated: 2023/12/22 17:53:00 by kipouliq         ###   ########.fr       */
+/*   Created: 2024/01/16 17:28:19 by kipouliq          #+#    #+#             */
+/*   Updated: 2024/01/16 19:02:25 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "./push_swap.h"
+
+int ft_exit_msg(int check_op, int sorted)
+{
+    if (check_op == -1)
+		return (0);
+	else if (sorted)
+		return (ft_printf("OK\n"));
+	else
+		return (ft_printf("KO\n"));
+}

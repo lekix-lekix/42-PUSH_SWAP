@@ -6,13 +6,13 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:54:30 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/16 13:28:00 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:08:45 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./push_swap.h"
 
-void	ft_free_lst(t_list **stack)
+t_list	*ft_free_lst(t_list **stack)
 {
 	t_list	*current;
 	t_list	*next;
@@ -24,6 +24,7 @@ void	ft_free_lst(t_list **stack)
 		free(current);
 		current = next;
 	}
+	return (NULL);
 }
 
 int	calc_distance(int nb1, int nb2)
@@ -53,17 +54,17 @@ int	ft_verify_sort(t_list **stack)
 t_list	*ft_min_max(t_list **stack, int min_or_max)
 {
 	t_list	*current;
-	t_list  *min_max;
+	t_list	*min_max;
 
 	current = *stack;
 	min_max = current;
 	while (current)
 	{
-        if (!min_or_max && current->value < min_max->value)
-            min_max = current;
-        else if (min_or_max && current->value > min_max->value)
-            min_max = current;
-        current = current->next;
+		if (!min_or_max && current->value < min_max->value)
+			min_max = current;
+		else if (min_or_max && current->value > min_max->value)
+			min_max = current;
+		current = current->next;
 	}
 	return (min_max);
 }

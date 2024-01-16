@@ -1,41 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_instructions.c                               :+:      :+:    :+:   */
+/*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/19 11:44:15 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/16 17:06:35 by kipouliq         ###   ########.fr       */
+/*   Created: 2024/01/16 16:56:13 by kipouliq          #+#    #+#             */
+/*   Updated: 2024/01/16 17:15:14 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./push_swap.h"
 
-void	swap_a(t_list **stack)
+int	ft_print_error(void)
 {
-	swap(stack);
-	recalculate_position(stack);
-	ft_printf("sa\n");
-}
-
-void	swap_b(t_list **stack)
-{
-	swap(stack);
-	recalculate_position(stack);
-	ft_printf("sb\n");
-}
-
-void	rotate_a(t_list **stack)
-{
-	rotate(stack);
-	recalculate_position(stack);
-	ft_printf("ra\n");
-}
-
-void	rotate_b(t_list **stack)
-{
-	rotate(stack);
-	recalculate_position(stack);
-	ft_printf("rb\n");
+	ft_printf("Error\n");
+	return (-1);
 }

@@ -6,7 +6,7 @@
 #    By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/18 12:11:49 by kipouliq          #+#    #+#              #
-#    Updated: 2024/01/16 14:34:07 by kipouliq         ###   ########.fr        #
+#    Updated: 2024/01/16 17:42:07 by kipouliq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,23 +20,26 @@ SRC = list_functions.c \
 		stack_instructions2.c \
 		stack_instructions3.c \
 		args_parsing.c \
-		args_parsing2.c \
 		main.c \
 		sort_functions.c \
 		utils.c \
 		utils2.c \
+		utils3.c \
 		cost_target_functions.c \
 		index_chunks_functions.c \
 		select_move_nodes.c
 
-SRCS_BONUS = list_functions.c \
+SRCS_BONUS = utils.c \
+		utils2.c \
+		utils3.c \
+		list_functions.c \
 		list_functions2.c \
 		stack_instructions.c \
 		stack_instructions2.c \
 		stack_instructions3.c \
 		args_parsing.c \
-		args_parsing2.c \
-		checker_bonus.c
+		checker_bonus.c \
+		checker2_bonus.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -73,6 +76,7 @@ clean :
 fclean : clean
 	make -sC $(PATH_LIBFT) fclean
 	rm -f $(NAME)
+	rm -f $(NAME_BONUS)
 
 re : fclean
 	make all

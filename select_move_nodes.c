@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:51:11 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/16 13:58:47 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/16 17:17:01 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	move_node_a(t_list **s_a, t_list **s_b, t_list *node)
 	}
 	push_a(s_a, s_b, 1);
 }
-// 
+
 void	push_node_b(t_list **s_a, t_list **s_b, t_list *node)
 {
 	int	node_direction;
