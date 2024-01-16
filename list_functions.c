@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:39:59 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/11 18:18:30 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/16 15:38:43 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ t_list	*init_stack(int argc, char **args)
 	t_list	*elem;
 	t_list	*stack;
 
-	i = 0;
+	i = -1;
 	stack = NULL;
-	while (++i < argc)
+	while (++i < argc - 1)
 	{
 		nb = ft_atoi(args[i]);
 		elem = ft_listnew(nb, i - 1);

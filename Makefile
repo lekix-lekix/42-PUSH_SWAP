@@ -6,7 +6,7 @@
 #    By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/18 12:11:49 by kipouliq          #+#    #+#              #
-#    Updated: 2024/01/15 14:08:33 by kipouliq         ###   ########.fr        #
+#    Updated: 2024/01/16 14:34:07 by kipouliq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,25 +14,29 @@ NAME = push_swap
 
 NAME_BONUS = checker
 
-SRC = make_stack.c \
-		list_functions.c \
+SRC = list_functions.c \
 		list_functions2.c \
 		stack_instructions.c \
 		stack_instructions2.c \
+		stack_instructions3.c \
 		args_parsing.c \
 		args_parsing2.c \
-		push_swap.c \
-		algo_functions.c
+		main.c \
+		sort_functions.c \
+		utils.c \
+		utils2.c \
+		cost_target_functions.c \
+		index_chunks_functions.c \
+		select_move_nodes.c
 
 SRCS_BONUS = list_functions.c \
 		list_functions2.c \
 		stack_instructions.c \
 		stack_instructions2.c \
-		make_stack.c \
+		stack_instructions3.c \
 		args_parsing.c \
 		args_parsing2.c \
-		checker_bonus.c \
-		push_swap.c
+		checker_bonus.c
 
 OBJ = $(SRC:.c=.o)
 

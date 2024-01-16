@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:16:46 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/04 17:41:49 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/16 15:40:06 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,35 +104,63 @@ int	args_parsing(char **args, int size)
 	return (1);
 }
 
-char	**args_checker(int argc, char **args)
+char	**args_checker(int *argc, char **args, int *malloc_args)
 {
-	int	size;
-    int malloc_flag;
+	int	malloc_flag;
 
-    malloc_flag = 0;
-	if (argc == 2)
+	malloc_flag = 0;
+	if (*argc == 2)
 	{
 		args = ft_split(args[1], ' ');
 		if (!args)
 			return (NULL);
-        malloc_flag = 1;
+		malloc_flag = 1;
 	}
-	size = tab_size(args);
-    if (!malloc_flag && args_parsing(args + 1, size - 1))
-        return (args);
-    else if (malloc_flag && args_parsing(args, size - 1))
-        return (args);
-    else
-        return (0);
+	if (!malloc_flag && args_parsing(args + 1, tab_size(args) - 1))
+        return (args + 1);
+	else if (malloc_flag && args_parsing(args, tab_size(args)))
+	{
+        *argc = tab_size(args) + 1;
+		*malloc_args = 1;
+		return (args);
+	}
+	else
+	{
+		if (malloc_flag)
+			ft_free_tab(args);
+		return (NULL);
+	}
 }
 
-// int	main(int argc, char **argv)
-// {
-// 	char **args;
-
-// 	args = args_checker(argc, argv);
-// 	if (!args)
-// 		printf("ERROR!\n");
-// 	else
-// 		printf("OK!\n");
-// }
+int	main(int argc, char **argv)
+{
+	t_list *stack_a;
+	t_list *stack_b;
+	char **args;
+	int malloc_args;
+    
+    (void) args;
+	malloc_args = 0;
+	argv = args_checker(&argc, argv, &malloc_args);
+	if (!argv)
+	{
+		ft_printf("Error\n");
+		return (-1);
+	}
+	int i = -1;
+	while (argv[i])
+		printf("%s\n", argv[++i]);
+	stack_a = init_stack(argc, argv); // needs free
+	stack_b = NULL;
+    ft_print_list(&stack_a, &stack_b, argc - 1);
+	if (malloc_args)
+		ft_free_tab(argv);
+	if (ft_verify_sort(&stack_a))
+	{
+		ft_free_lst(&stack_a);
+		return (0);
+	}
+	pick_an_algo(&stack_a, &stack_b, argc - 1);
+	ft_free_lst(&stack_a);
+	return (0);
+}
