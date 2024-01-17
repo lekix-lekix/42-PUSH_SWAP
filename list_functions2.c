@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 13:43:24 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/16 17:08:21 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/17 15:14:25 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void	recalculate_position(t_list **stack)
 	int		i;
 
 	i = 0;
+	if (!(*stack))
+		return ;
 	current = *stack;
 	while (current)
 	{

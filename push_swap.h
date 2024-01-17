@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:15:14 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/16 17:35:16 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/17 16:54:29 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ int					ft_strcmp(char *s1, char *s2);
 int					ft_print_error(void);
 int					ft_exit_msg(int check_op, int sorted);
 int					ft_free_tab(char **tab);
+void				calc_cost(t_list **s_a, t_list **s_b);
+int					ft_full_verify_sort(t_list **s_a, t_list **s_b);
 
 #endif

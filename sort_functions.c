@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:40:31 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/16 18:11:00 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/17 17:58:42 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,21 @@ void	ft_sort_big(t_list **s_a, t_list **s_b)
 {
 	int	chunk_nb;
 
-	if (ft_listsize(s_a) <= 100)
+	if (ft_listsize(s_a) <= 140)
+	{
 		chunk_nb = 1;
+		assign_chunk_nb(s_a, chunk_nb);
+		while (ft_listsize(s_a) > 3)
+			push_b(s_a, s_b, 1);
+	}
 	else
+	{
 		chunk_nb = 5;
-	assign_chunk_nb(s_a, chunk_nb);
-	calc_cost_first_pos(s_a);
-	calc_cost_first_pos(s_b);
-	push_chunks_b(s_a, s_b, chunk_nb);
+		assign_chunk_nb(s_a, chunk_nb);
+		calc_cost_first_pos(s_a);
+		calc_cost_first_pos(s_b);
+		push_chunks_b(s_a, s_b, chunk_nb);
+	}
 	ft_sort_3(s_a);
 	edit_list_costs(s_a, s_b);
 	sort_stack_pusha(s_a, s_b, chunk_nb);

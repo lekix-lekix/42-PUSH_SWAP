@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:12:58 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/16 17:26:35 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:19:01 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ int	main(int argc, char **argv)
 	t_list	*stack_b;
 	int		malloc_args;
 
+	argc -= 1;
+	if (!argc || (argc == 1 && !argv[1][0]))
+		return (0);
 	malloc_args = 0;
 	argv = args_checker(&argc, argv, &malloc_args);
 	if (!argv)
@@ -63,7 +66,7 @@ int	main(int argc, char **argv)
 		ft_free_lst(&stack_a);
 		return (0);
 	}
-	pick_an_algo(&stack_a, &stack_b, argc - 1);
+	pick_an_algo(&stack_a, &stack_b, argc);
 	ft_free_lst(&stack_a);
 	return (0);
 }

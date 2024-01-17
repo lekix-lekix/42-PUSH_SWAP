@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:28:13 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/16 17:08:42 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:41:06 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	rotate(t_list **stack)
 	t_list	*tmp;
 	t_list	*current;
 
-	if (!*stack)
+	if (!*stack || ft_listsize(stack) == 1)
 		return ;
 	tmp = *stack;
 	*stack = (*stack)->next;
@@ -48,7 +48,7 @@ void	reverse_rotate(t_list **stack)
 	t_list	*head;
 	t_list	*prev;
 
-	if (!*stack)
+	if (!*stack || ft_listsize(stack) == 1)
 		return ;
 	head = *stack;
 	current = *stack;

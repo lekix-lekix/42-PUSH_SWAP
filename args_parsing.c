@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:16:46 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/16 17:09:30 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:19:50 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,18 @@ char	**args_checker(int *argc, char **args, int *malloc_args)
 	int	malloc_flag;
 
 	malloc_flag = 0;
-	if (*argc == 2)
+	if (*argc == 1)
 	{
 		args = ft_split(args[1], ' ');
 		if (!args)
 			return (NULL);
 		malloc_flag = 1;
 	}
-	if (!malloc_flag && args_parsing(args + 1, tab_size(args) - 1))
+	if (!malloc_flag && args_parsing(args + 1, tab_size(args + 1)))
 		return (args + 1);
-	else if (malloc_flag && args_parsing(args, tab_size(args)))
+	else if (malloc_flag && args_parsing(args + 1, tab_size(args) - 1))
 	{
-		*argc = tab_size(args) + 1;
+		*argc = tab_size(args);
 		*malloc_args = 1;
 		return (args);
 	}
