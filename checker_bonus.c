@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 10:39:04 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/17 18:41:23 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/18 12:42:01 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,7 @@ int	main(int argc, char **argv)
 	int		sorted;
 	int		malloc_args;
 
-	argc -= 1;
-	if (!argc || (argc == 1 && !argv[1][0]))
+	if (argc == 1 || (argc == 2 && !argv[1][0]))
 		return (0);
 	malloc_args = 0;
 	argv = args_checker(&argc, argv, &malloc_args);
