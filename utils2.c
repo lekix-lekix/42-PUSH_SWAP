@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:07:50 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/16 17:15:04 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:44:54 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,13 @@ int	str_digits_check(char *str)
 {
 	int	i;
 
-	i = 0;
-	while (str[i])
+	i = -1;
+	while (str[++i])
 	{
+		if ((str[i] == '-' || str[i] == '+') && i == 0)
+			continue ;
 		if (!ft_isdigit(str[i]))
 			return (0);
-		i++;
 	}
 	return (1);
 }

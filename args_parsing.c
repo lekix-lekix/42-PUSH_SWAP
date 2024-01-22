@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:16:46 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/18 12:08:26 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:44:51 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	arg_check(char *str)
 	int	arg_len;
 
 	arg_len = ft_strlen(str);
-	if ((arg_len == 1 && !ft_isdigit(str[0])) || arg_len > 10)
+	if (arg_len > 11)
 		return (0);
-	if (arg_len != 1 && !str_digits_check(str + 1))
+	if (!str_digits_check(str))
 		return (0);
-	if (arg_len == 10 && !ft_check_overflow(str))
+	if ((arg_len == 10 || arg_len == 11) && !ft_check_overflow(str))
 		return (0);
 	return (1);
 }
@@ -62,7 +62,7 @@ char	**args_checker(int *argc, char **args, int *malloc_args)
 {
 	int	malloc_flag;
 
-    *argc -= 1;
+	*argc -= 1;
 	malloc_flag = 0;
 	if (*argc == 1)
 	{
@@ -72,7 +72,7 @@ char	**args_checker(int *argc, char **args, int *malloc_args)
 		malloc_flag = 1;
 	}
 	if (!malloc_flag && args_parsing(args + 1, tab_size(args + 1)))
-	    return (args + 1);
+		return (args + 1);
 	else if (malloc_flag && args_parsing(args, tab_size(args)))
 	{
 		*argc = tab_size(args);

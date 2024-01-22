@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:54:30 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/16 17:08:45 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:45:10 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,13 @@ t_list	*ft_free_lst(t_list **stack)
 	return (NULL);
 }
 
-int	calc_distance(int nb1, int nb2)
+int	calc_distance(int numb1, int numb2)
 {
+	long int	nb1;
+	long int	nb2;
+
+	nb1 = numb1;
+	nb2 = numb2;
 	if (nb1 > nb2)
 		return (nb1 - nb2);
 	else

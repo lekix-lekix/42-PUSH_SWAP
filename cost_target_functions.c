@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:04:18 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/16 17:16:19 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:09:50 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ t_list	*find_target_node_a(t_list **stack, t_list *node)
 
 	current = *stack;
 	closest = NULL;
-	closest_distance = ft_min_max(stack, 1)->value - ft_min_max(stack,
-			0)->value;
+	closest_distance = calc_distance(ft_min_max(stack, 1)->value,
+			ft_min_max(stack, 0)->value);
 	while (current)
 	{
 		if (node->value < current->value && calc_distance(current->value,
