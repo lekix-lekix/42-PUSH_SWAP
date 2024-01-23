@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:15:14 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/17 16:54:29 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:02:47 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void				rotate_both(t_list **s_a, t_list **s_b, int print);
 void				reverse_rotate_a(t_list **stack);
 void				reverse_rotate_b(t_list **stack);
 void				reverse_rotate_both(t_list **s_a, t_list **s_b, int print);
-t_list				*init_stack(int argc, char **args);
+t_list				*init_stack(int argc, char **args, int *malloc_args);
 char				**args_checker(int *argc, char **args, int *malloc_args);
 int					ft_listsize(t_list **lst);
 t_list				*ft_min_max(t_list **stack, int min_or_max);
@@ -78,5 +78,6 @@ int					ft_exit_msg(int check_op, int sorted);
 int					ft_free_tab(char **tab);
 void				calc_cost(t_list **s_a, t_list **s_b);
 int					ft_full_verify_sort(t_list **s_a, t_list **s_b);
+int					ft_verify_stack(t_list **stack, char **args, int *malloc_args);
 
 #endif

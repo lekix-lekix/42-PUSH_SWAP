@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:39:41 by kipouliq          #+#    #+#             */
-/*   Updated: 2023/11/16 13:32:42 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/22 18:06:05 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	strs_count = ft_count_words(s, c);
+	if (!strs_count)
+		return (NULL);
 	str_arr = malloc(sizeof(char *) * (strs_count + 1));
 	if (!str_arr)
 		return (NULL);

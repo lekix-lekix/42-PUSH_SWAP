@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 10:39:04 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/18 12:42:01 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:04:07 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	main(int argc, char **argv)
 	argv = args_checker(&argc, argv, &malloc_args);
 	if (!argv)
 		return (ft_print_error());
-	stack_a = init_stack(argc, argv);
+	stack_a = init_stack(argc, argv, &malloc_args);
 	if (!stack_a)
 		return (ft_print_error());
 	if (malloc_args)

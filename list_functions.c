@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 14:39:59 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/17 15:08:04 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/23 15:02:24 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_listadd_back(t_list **stack, t_list *new_node)
 	current->next = new_node;
 }
 
-t_list	*init_stack(int argc, char **args)
+t_list	*init_stack(int argc, char **args, int *malloc_args)
 {
 	int		i;
 	int		nb;
@@ -60,6 +60,8 @@ t_list	*init_stack(int argc, char **args)
 		}
 		ft_listadd_back(&stack, elem);
 	}
+	if (!ft_verify_stack(&stack, args, malloc_args))
+		return (ft_free_lst(&stack));
 	return (stack);
 }
 
