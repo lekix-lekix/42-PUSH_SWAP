@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:56:13 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/17 15:33:55 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:51:50 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,12 @@ int	ft_full_verify_sort(t_list **s_a, t_list **s_b)
 		current = current->next;
 	}
 	return (1);
+}
+
+long long int abs_value(long long int a)
+{
+    if (a < 0)
+        return (a *= -1);
+    else
+        return (a);
 }

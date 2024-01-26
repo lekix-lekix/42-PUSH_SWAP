@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:19:10 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/17 17:59:42 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:10:24 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ t_list	*find_closest_index(t_list **stack, t_list *node)
 {
 	t_list	*current;
 	t_list	*closest;
-	int		distance;
+	long long int		distance;
 
 	current = *stack;
 	closest = ft_min_max(stack, 1);
-	distance = calc_distance(node->value, ft_min_max(stack, 1)->value);
+	distance = 4294967295;
 	while (current)
 	{
-		if (calc_distance(current->value, node->value) < distance
-			&& node->value < current->value)
+        // printf("node %d current %d abs %lld\n",  current->value, node->value, calc_abs_distance(node->value, current->value));
+		if (node->value < current->value && calc_abs_distance(current->value, node->value) < distance)
 		{
-			distance = calc_distance(current->value, node->value);
+			distance = calc_abs_distance(current->value, node->value);
 			closest = current;
 		}
 		current = current->next;

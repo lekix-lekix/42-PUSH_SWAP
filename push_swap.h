@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:15:14 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/23 15:02:47 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/26 18:10:47 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void				push_chunks_b(t_list **s_a, t_list **s_b, int nb);
 void				sort_stack_pusha(t_list **s_a, t_list **s_b, int nb);
 void				assign_index(t_list **stack);
 t_list				*ft_free_lst(t_list **stack);
-int					calc_distance(int nb1, int nb2);
+int		calc_distance(int nb1, int nb2);
 int					up_or_down(t_list **stack, t_list *node);
 int					is_chunk_done(t_list **stack, int chunk_nb);
 t_list				*find_closest_index(t_list **stack, t_list *node);
@@ -78,6 +78,10 @@ int					ft_exit_msg(int check_op, int sorted);
 int					ft_free_tab(char **tab);
 void				calc_cost(t_list **s_a, t_list **s_b);
 int					ft_full_verify_sort(t_list **s_a, t_list **s_b);
-int					ft_verify_stack(t_list **stack, char **args, int *malloc_args);
+int					ft_verify_stack(t_list **stack, char **args,
+						int *malloc_args);
+long long int                 abs_value(long long int a);
+// void                print_list(t_list **stack); 
+long long int	calc_abs_distance(int nb1, int nb2);
 
 #endif
