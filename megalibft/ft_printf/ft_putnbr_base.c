@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lekix <lekix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:36:03 by kipouliq          #+#    #+#             */
-/*   Updated: 2023/11/23 15:13:29 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/28 21:22:49 by lekix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	putnbr_base(unsigned int number, char *base, unsigned int base_len,
 		int *count)
 {
-	if (number < 0)
-	{
-		ft_putchar_fd('-', 1);
-		number = -number;
-		*count += 1;
-	}
-	if (number >= 0 && number < base_len)
+	// if (number < 0)
+	// {
+	// 	ft_putchar_fd('-', 1);
+	// 	number = -number;
+	// 	*count += 1;
+	// }
+	if (number < base_len)
 	{
 		ft_putchar_fd(base[number], 1);
 		*count += 1;

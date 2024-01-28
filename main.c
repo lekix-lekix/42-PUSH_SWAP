@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lekix <lekix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:12:58 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/26 18:11:13 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/27 17:16:05 by lekix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,31 +55,30 @@ void	pick_an_algo(t_list **s_a, t_list **s_b, int nb)
 //     }
 // }
 
-int	main(int argc, char **argv)
-{
-	t_list	*stack_a;
-	t_list	*stack_b;
-	int		malloc_args;
+// int	main(int argc, char **argv)
+// {
+// 	t_list	*stack_a;
+// 	t_list	*stack_b;
+// 	int		malloc_args;
 
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		return (0);
-	malloc_args = 0;
-	argv = args_checker(&argc, argv, &malloc_args);
-	if (!argv)
-		return (ft_print_error());
-	stack_a = init_stack(argc, argv, &malloc_args);
-	if (!stack_a)
-		return (ft_print_error());
-	stack_b = NULL;
-	if (malloc_args)
-		ft_free_tab(argv);
-	if (ft_verify_sort(&stack_a))
-	{
-		ft_free_lst(&stack_a);
-		return (0);
-	}
-	pick_an_algo(&stack_a, &stack_b, argc);
-    // print_list(&stack_a);
-	ft_free_lst(&stack_a);
-	return (0);
-}
+// 	if (argc == 1 || (argc == 2 && !argv[1][0]))
+// 		return (0);
+// 	malloc_args = 0;
+// 	argv = args_checker(&argc, argv, &malloc_args);
+// 	if (!argv)
+// 		return (ft_print_error());
+// 	stack_a = init_stack(argc, argv, &malloc_args);
+// 	if (!stack_a)
+// 		return (ft_print_error());
+// 	stack_b = NULL;
+// 	if (malloc_args)
+// 		ft_free_tab(argv);
+// 	if (ft_verify_sort(&stack_a))
+// 	{
+// 		ft_free_lst(&stack_a);
+// 		return (0);
+// 	}
+// 	pick_an_algo(&stack_a, &stack_b, argc);
+// 	ft_free_lst(&stack_a);
+// 	return (0);
+// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lekix <lekix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:15:14 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/26 18:10:47 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/28 21:44:57 by lekix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void				reverse_rotate_a(t_list **stack);
 void				reverse_rotate_b(t_list **stack);
 void				reverse_rotate_both(t_list **s_a, t_list **s_b, int print);
 t_list				*init_stack(int argc, char **args, int *malloc_args);
-char				**args_checker(int *argc, char **args, int *malloc_args);
+char				**args_checker(int argc, char **argv);
 int					ft_listsize(t_list **lst);
 t_list				*ft_min_max(t_list **stack, int min_or_max);
 void				recalculate_position(t_list **stack);
@@ -83,5 +83,6 @@ int					ft_verify_stack(t_list **stack, char **args,
 long long int                 abs_value(long long int a);
 // void                print_list(t_list **stack); 
 long long int	calc_abs_distance(int nb1, int nb2);
+char	*ft_strjoin_space(char const *s1, char const *s2);
 
 #endif

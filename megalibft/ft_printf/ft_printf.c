@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lekix <lekix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:04:09 by kipouliq          #+#    #+#             */
-/*   Updated: 2023/11/24 14:56:43 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/28 21:19:59 by lekix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,10 @@ void	ft_str_parse(const char *str, va_list args, int *c_count)
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-	int		i;
 	int		count;
 
 	if (format == NULL)
 		return (-1);
-	i = -1;
 	count = 0;
 	va_start(args, format);
 	ft_str_parse(format, args, &count);

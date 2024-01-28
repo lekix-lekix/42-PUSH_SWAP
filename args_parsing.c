@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lekix <lekix@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:16:46 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/23 15:21:28 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/28 23:15:05 by lekix            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,31 +85,80 @@ int	ft_verify_stack(t_list **stack, char **args, int *malloc_args)
 	return (1);
 }
 
-char	**args_checker(int *argc, char **args, int *malloc_args)
-{
-	int	malloc_flag;
+// char	**args_checker(int *argc, char **args, int *malloc_args)
+// {
+// 	int	malloc_flag;
 
-	*argc -= 1;
-	malloc_flag = 0;
-	if (*argc == 1)
+// 	*argc -= 1;
+// 	malloc_flag = 0;
+// 	if (*argc == 1)
+// 	{
+// 		args = ft_split(args[1], ' ');
+// 		if (!args)
+// 			return (NULL);
+// 		malloc_flag = 1;
+// 	}
+// 	if (!malloc_flag && args_parsing(args + 1, tab_size(args + 1)))
+// 		return (args + 1);
+// 	else if (malloc_flag && args_parsing(args, tab_size(args)))
+// 	{
+// 		*argc = tab_size(args);
+// 		*malloc_args = 1;
+// 		return (args);
+// 	}
+// 	else
+// 	{
+// 		if (malloc_flag)
+// 			ft_free_tab(args);
+// 		return (NULL);
+// 	}
+// }
+
+char	**args_split(char **argv)
+{
+	char	**args;
+	char	*args_tmp;
+	int		i;
+
+	i = 0;
+	while (argv[++i])
 	{
-		args = ft_split(args[1], ' ');
-		if (!args)
-			return (NULL);
-		malloc_flag = 1;
+		if (i == 1)
+		{
+			args_tmp = ft_strdup(argv[i]);
+			if (!args_tmp)
+				return (NULL);
+		}
+		else
+		{
+			free(args_tmp);
+			args_tmp = ft_strjoin_space(args_tmp, argv[i]);
+			if (!args_tmp)
+				return (NULL);
+		}
 	}
-	if (!malloc_flag && args_parsing(args + 1, tab_size(args + 1)))
-		return (args + 1);
-	else if (malloc_flag && args_parsing(args, tab_size(args)))
-	{
-		*argc = tab_size(args);
-		*malloc_args = 1;
-		return (args);
-	}
-	else
-	{
-		if (malloc_flag)
-			ft_free_tab(args);
+	args = ft_split(args_tmp, ' ');
+	if (!args)
 		return (NULL);
-	}
+	return (args);
+}
+
+char	**args_checker(char **argv)
+{
+	char	**args;
+
+	args = args_split(argv);
+	if (!args)
+		return (NULL);
+	return (args);
+}
+
+int	main(int argc, char **argv)
+{
+	int i = -1;
+	char **args;
+
+	args = args_checker(argc, argv);
+	while (args[++i])
+		printf("'%s'\n", args[i]);
 }
