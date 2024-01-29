@@ -6,13 +6,13 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 14:07:50 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/22 16:44:54 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/29 12:34:06 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./push_swap.h"
 
-int	ft_free_tab(char **tab)
+char	**ft_free_tab(char **tab)
 {
 	int	i;
 
@@ -20,7 +20,7 @@ int	ft_free_tab(char **tab)
 	while (tab[++i])
 		free(tab[i]);
 	free(tab);
-	return (0);
+	return (NULL);
 }
 
 void	final_order(t_list **stack)

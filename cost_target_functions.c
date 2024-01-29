@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:04:18 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/26 18:09:57 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:25:02 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,44 +60,19 @@ void	edit_list_costs(t_list **s_a, t_list **s_b)
 	calc_cost(s_a, s_b);
 }
 
-// t_list	*find_target_node_a(t_list **stack, t_list *node)
-// {
-// 	t_list			*current;
-// 	t_list			*closest;
-// 	long long int	closest_distance;
-
-// 	current = *stack;
-// 	closest = NULL;
-// 	closest_distance = 4294967295;
-// 	while (current)
-// 	{
-//         printf("closest distance = %lld\n", closest_distance);
-//         printf("node %d current %d calc_dist %lld\n", node->value, current->value, abs_value(calc_distance(current->value, node->value)));
-//         if (node->value < current->value && abs_value(calc_distance(current->value,
-// 				node->value) < closest_distance))
-// 		{
-// 			closest_distance = abs_value(calc_distance(current->value, node->value));
-// 			closest = current;
-// 		}
-// 		current = current->next;
-// 	}
-//     current = *stack;
-//     printf("closest found = %d\n", closest->value);
-// 	return (closest);
-// }
-
 t_list	*find_target_node_a(t_list **stack, t_list *node)
 {
-	t_list			*current;
-	t_list			*closest;
-	int             closest_index;
+	t_list	*current;
+	t_list	*closest;
+	int		closest_index;
 
 	current = *stack;
 	closest = NULL;
 	closest_index = ft_min_max(stack, 1)->index;
 	while (current)
 	{
-        if (node->value < current->value && calc_distance(node->index, current->index) < closest_index)
+		if (node->value < current->value && calc_distance(node->index,
+				current->index) < closest_index)
 		{
 			closest_index = calc_distance(node->index, current->index);
 			closest = current;

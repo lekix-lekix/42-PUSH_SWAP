@@ -6,12 +6,11 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 12:09:58 by kipouliq          #+#    #+#             */
-/*   Updated: 2023/11/23 16:07:28 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:12:28 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int	ft_printstr(void *ptr)
 {

@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:39:41 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/22 18:06:05 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:07:22 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static int	ft_fill_arr(char **strs, char const *s, char c)
 	k = -1;
 	while (s[i])
 	{
-		i = 0;
 		ft_skip(s, &i, c, 1);
 		if (!s[i])
 			return (0);
@@ -82,6 +81,7 @@ static int	ft_fill_arr(char **strs, char const *s, char c)
 			if (!s[j])
 				return (0);
 			s += j;
+			i = 0;
 		}
 	}
 	return (0);
@@ -115,13 +115,14 @@ char	**ft_split(char const *s, char c)
 	return (str_arr);
 }
 
-// int main ()
+// int main (int argc, char **argv)
 // {
-// 	char **str = ft_split("a a a a a ", ' ');
+//     (void) argc;
+// 	char **str = ft_split(argv[1], ' ');
 // 	int i = -1;
 // 	while (str && str[++i])
 // 	{
-// 		printf("str[%i] = %s\n", i, str[i]);
+// 		printf("str[%i] = |%s|\n", i, str[i]);
 // 		free(str[i]);
 // 	}
 // 	free(str);

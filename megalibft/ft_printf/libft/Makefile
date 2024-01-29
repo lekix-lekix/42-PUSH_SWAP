@@ -6,7 +6,7 @@
 #    By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/16 14:33:33 by lekix             #+#    #+#              #
-#    Updated: 2024/01/11 16:05:45 by kipouliq         ###   ########.fr        #
+#    Updated: 2024/01/29 16:33:45 by kipouliq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ CC = cc
 
 INCLUDE = -I .
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 all: $(NAME)
 

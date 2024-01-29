@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lekix <lekix@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:12:58 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/27 17:16:05 by lekix            ###   ########.fr       */
+/*   Updated: 2024/01/29 14:23:38 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	sort_stack_pusha(t_list **s_a, t_list **s_b, int nb)
 void	pick_an_algo(t_list **s_a, t_list **s_b, int nb)
 {
 	assign_index(s_a);
-    // print_list(s_a);
 	if (nb == 2)
 		ft_sort_2(s_a);
 	else if (nb == 3)
@@ -43,42 +42,27 @@ void	pick_an_algo(t_list **s_a, t_list **s_b, int nb)
 	final_order(s_a);
 }
 
-// void    print_list(t_list **stack)
-// {
-//     t_list *current;
+int	main(int argc, char **argv)
+{
+	t_list	*stack_a;
+	t_list	*stack_b;
 
-//     current = *stack;
-//     while (current)
-//     {
-//         printf("current %d index %d\n", current->value, current->index);
-//         current = current->next;
-//     }
-// }
-
-// int	main(int argc, char **argv)
-// {
-// 	t_list	*stack_a;
-// 	t_list	*stack_b;
-// 	int		malloc_args;
-
-// 	if (argc == 1 || (argc == 2 && !argv[1][0]))
-// 		return (0);
-// 	malloc_args = 0;
-// 	argv = args_checker(&argc, argv, &malloc_args);
-// 	if (!argv)
-// 		return (ft_print_error());
-// 	stack_a = init_stack(argc, argv, &malloc_args);
-// 	if (!stack_a)
-// 		return (ft_print_error());
-// 	stack_b = NULL;
-// 	if (malloc_args)
-// 		ft_free_tab(argv);
-// 	if (ft_verify_sort(&stack_a))
-// 	{
-// 		ft_free_lst(&stack_a);
-// 		return (0);
-// 	}
-// 	pick_an_algo(&stack_a, &stack_b, argc);
-// 	ft_free_lst(&stack_a);
-// 	return (0);
-// }
+	if (argc == 1)
+		return (0);
+	argv = args_checker(argv);
+	if (!argv)
+		return (ft_print_error());
+	stack_a = init_stack(argv);
+	if (!stack_a)
+		return (ft_print_error());
+	stack_b = NULL;
+	ft_free_tab(argv);
+	if (ft_verify_sort(&stack_a))
+	{
+		ft_free_lst(&stack_a);
+		return (0);
+	}
+	pick_an_algo(&stack_a, &stack_b, ft_listsize(&stack_a));
+	ft_free_lst(&stack_a);
+	return (0);
+}

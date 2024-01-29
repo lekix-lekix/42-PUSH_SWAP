@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lekix <lekix@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 15:16:46 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/28 23:15:05 by lekix            ###   ########.fr       */
+/*   Updated: 2024/01/29 17:22:17 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,6 @@ int	arg_check(char *str)
 	if ((arg_len == 10 || arg_len == 11) && !ft_check_overflow(str))
 		return (0);
 	return (1);
-}
-
-int	tab_size(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
 }
 
 int	args_parsing(char **args, int size)
@@ -60,7 +50,7 @@ int	args_parsing(char **args, int size)
 	return (1);
 }
 
-int	ft_verify_stack(t_list **stack, char **args, int *malloc_args)
+int	ft_verify_stack(t_list **stack, char **args)
 {
 	t_list	*current;
 	t_list	*elem_cmp;
@@ -74,8 +64,7 @@ int	ft_verify_stack(t_list **stack, char **args, int *malloc_args)
 		{
 			if (current->value == elem_cmp->value)
 			{
-				if (*malloc_args == 1)
-					ft_free_tab(args);
+				ft_free_tab(args);
 				return (0);
 			}
 			current = current->next;
@@ -85,80 +74,43 @@ int	ft_verify_stack(t_list **stack, char **args, int *malloc_args)
 	return (1);
 }
 
-// char	**args_checker(int *argc, char **args, int *malloc_args)
-// {
-// 	int	malloc_flag;
-
-// 	*argc -= 1;
-// 	malloc_flag = 0;
-// 	if (*argc == 1)
-// 	{
-// 		args = ft_split(args[1], ' ');
-// 		if (!args)
-// 			return (NULL);
-// 		malloc_flag = 1;
-// 	}
-// 	if (!malloc_flag && args_parsing(args + 1, tab_size(args + 1)))
-// 		return (args + 1);
-// 	else if (malloc_flag && args_parsing(args, tab_size(args)))
-// 	{
-// 		*argc = tab_size(args);
-// 		*malloc_args = 1;
-// 		return (args);
-// 	}
-// 	else
-// 	{
-// 		if (malloc_flag)
-// 			ft_free_tab(args);
-// 		return (NULL);
-// 	}
-// }
-
 char	**args_split(char **argv)
 {
 	char	**args;
-	char	*args_tmp;
+	char	*args_str;
 	int		i;
 
 	i = 0;
 	while (argv[++i])
 	{
 		if (i == 1)
-		{
-			args_tmp = ft_strdup(argv[i]);
-			if (!args_tmp)
-				return (NULL);
-		}
+			args_str = ft_strjoin_space(NULL, argv[i]);
 		else
-		{
-			free(args_tmp);
-			args_tmp = ft_strjoin_space(args_tmp, argv[i]);
-			if (!args_tmp)
-				return (NULL);
-		}
+			args_str = ft_strjoin_space(args_str, argv[i]);
+		if (!args_str)
+			return (NULL);
 	}
-	args = ft_split(args_tmp, ' ');
+	args = ft_split(args_str, ' ');
 	if (!args)
+	{
+		free(args_str);
 		return (NULL);
+	}
+	free(args_str);
 	return (args);
 }
 
 char	**args_checker(char **argv)
 {
 	char	**args;
+	int		args_check;
 
 	args = args_split(argv);
 	if (!args)
 		return (NULL);
-	return (args);
-}
-
-int	main(int argc, char **argv)
-{
-	int i = -1;
-	char **args;
-
-	args = args_checker(argc, argv);
-	while (args[++i])
-		printf("'%s'\n", args[i]);
+	args_check = args_parsing(args, tab_size(args));
+	if (args_check)
+		return (args);
+	else
+		return (ft_free_tab(args));
 }

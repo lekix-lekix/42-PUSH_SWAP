@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lekix <lekix@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 11:04:09 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/28 21:19:59 by lekix            ###   ########.fr       */
+/*   Updated: 2024/01/29 15:55:54 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,25 +62,3 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (count);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	int res;
-
-// 	res = ft_printf("%c, %s, %p, %d, %i, %u, %x, %X, 
-//	%%\n", 'a', "str", &res, 42, 42, -42, 1234, 1234);
-// 	printf("res = %d\n", res);
-// 	res = printf("%c, %s, %p, %d, %i, %u, %x, %X, 
-// %%\n", 'a', "str", &res, 42, 42, -42, 1234, 1234);
-// 	printf("res = %d\n", res);
-// 	ft_printf("%%%c%%%p%%%d%%%x\n", 'a', &res, 42, 12345);
-// 	printf("res = %d\n", res);
-// 	printf("%%%c%%%p%%%d%%%x\n", 'a', &res, 42, 12345);
-// 	printf("res = %d\n", res);
-// 	res = ft_printf(0);
-// 	ft_printf("res = %d\n", res);
-// 	res = ft_printf(0);
-// 	printf("res = %d\n", res);
-// }

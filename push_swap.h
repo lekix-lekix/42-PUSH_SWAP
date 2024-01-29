@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lekix <lekix@student.42.fr>                +#+  +:+       +#+        */
+/*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 12:15:14 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/28 21:44:57 by lekix            ###   ########.fr       */
+/*   Updated: 2024/01/29 14:22:47 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "./megalibft/megalibft.h"
-# include <stdio.h> // to remove
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -42,8 +41,8 @@ void				rotate_both(t_list **s_a, t_list **s_b, int print);
 void				reverse_rotate_a(t_list **stack);
 void				reverse_rotate_b(t_list **stack);
 void				reverse_rotate_both(t_list **s_a, t_list **s_b, int print);
-t_list				*init_stack(int argc, char **args, int *malloc_args);
-char				**args_checker(int argc, char **argv);
+t_list				*init_stack(char **args);
+char				**args_checker(char **argv);
 int					ft_listsize(t_list **lst);
 t_list				*ft_min_max(t_list **stack, int min_or_max);
 void				recalculate_position(t_list **stack);
@@ -62,27 +61,26 @@ void				push_chunks_b(t_list **s_a, t_list **s_b, int nb);
 void				sort_stack_pusha(t_list **s_a, t_list **s_b, int nb);
 void				assign_index(t_list **stack);
 t_list				*ft_free_lst(t_list **stack);
-int		calc_distance(int nb1, int nb2);
+int					calc_distance(int nb1, int nb2);
 int					up_or_down(t_list **stack, t_list *node);
 int					is_chunk_done(t_list **stack, int chunk_nb);
 t_list				*find_closest_index(t_list **stack, t_list *node);
 t_list				*select_best_node(t_list **stack, int nb);
 void				push_node_b(t_list **s_a, t_list **s_b, t_list *node);
 void				final_order(t_list **stack);
-int					ft_free_tab(char **tab);
+char				**ft_free_tab(char **tab);
 int					str_digits_check(char *str);
 int					ft_check_overflow(char *str);
 int					ft_strcmp(char *s1, char *s2);
 int					ft_print_error(void);
 int					ft_exit_msg(int check_op, int sorted);
-int					ft_free_tab(char **tab);
 void				calc_cost(t_list **s_a, t_list **s_b);
 int					ft_full_verify_sort(t_list **s_a, t_list **s_b);
-int					ft_verify_stack(t_list **stack, char **args,
-						int *malloc_args);
-long long int                 abs_value(long long int a);
-// void                print_list(t_list **stack); 
-long long int	calc_abs_distance(int nb1, int nb2);
-char	*ft_strjoin_space(char const *s1, char const *s2);
+int					ft_verify_stack(t_list **stack, char **args);
+long long int		abs_value(long long int a);
+void				print_list(t_list **stack);
+long long int		calc_abs_distance(int nb1, int nb2);
+char				*ft_strjoin_space(char const *s1, char const *s2);
+int					tab_size(char **tab);
 
 #endif

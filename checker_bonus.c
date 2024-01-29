@@ -6,7 +6,7 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 10:39:04 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/23 15:04:07 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:35:10 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,19 +79,16 @@ int	main(int argc, char **argv)
 	t_list	*stack_b;
 	int		check_op;
 	int		sorted;
-	int		malloc_args;
 
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
+	if (argc == 1)
 		return (0);
-	malloc_args = 0;
-	argv = args_checker(&argc, argv, &malloc_args);
+	argv = args_checker(argv);
 	if (!argv)
 		return (ft_print_error());
-	stack_a = init_stack(argc, argv, &malloc_args);
+	stack_a = init_stack(argv);
 	if (!stack_a)
 		return (ft_print_error());
-	if (malloc_args)
-		ft_free_tab(argv);
+	ft_free_tab(argv);
 	stack_b = NULL;
 	check_op = get_instructions(&stack_a, &stack_b);
 	sorted = ft_full_verify_sort(&stack_a, &stack_b);

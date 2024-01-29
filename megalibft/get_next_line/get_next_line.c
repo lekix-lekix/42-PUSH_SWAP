@@ -6,12 +6,11 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 17:20:39 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/16 17:13:23 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:12:30 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./get_next_line.h"
-#include <stdio.h>
 
 char	*ft_dup_cpy_malloc_free(char *str, char *end_ptr, char *to_free)
 {

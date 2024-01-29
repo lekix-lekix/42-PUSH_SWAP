@@ -6,51 +6,36 @@
 /*   By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 12:54:30 by kipouliq          #+#    #+#             */
-/*   Updated: 2024/01/26 17:54:30 by kipouliq         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:24:51 by kipouliq         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./push_swap.h"
 
-t_list	*ft_free_lst(t_list **stack)
-{
-	t_list	*current;
-	t_list	*next;
-
-	current = *stack;
-	while (current)
-	{
-		next = current->next;
-		free(current);
-		current = next;
-	}
-	return (NULL);
-}
-
 long long int	calc_abs_distance(int nb1, int nb2)
 {
-    long int abs_nb1;
-    long int abs_nb2;
+	long int	abs_nb1;
+	long int	abs_nb2;
 
-    abs_nb1 = abs_value(nb1);
-    abs_nb2 = abs_value(nb2);
-    if ((nb1 >= 0 && nb2 >= 0) || (nb1 <= 0 && nb2 <= 0))
-    {
-        if (abs_nb1 > abs_nb2)
-            return (abs_value(abs_nb1 - abs_nb2));
-        else
-            return (abs_value(abs_nb2 - abs_nb1));
-    }
-    else
-        return (abs_nb1 + abs_nb2);
+	abs_nb1 = abs_value(nb1);
+	abs_nb2 = abs_value(nb2);
+	if ((nb1 >= 0 && nb2 >= 0) || (nb1 <= 0 && nb2 <= 0))
+	{
+		if (abs_nb1 > abs_nb2)
+			return (abs_value(abs_nb1 - abs_nb2));
+		else
+			return (abs_value(abs_nb2 - abs_nb1));
+	}
+	else
+		return (abs_nb1 + abs_nb2);
 }
 
-int calc_distance(int nb1, int nb2)
+int	calc_distance(int nb1, int nb2)
 {
-    if (nb1 > nb2)
-        return (nb1 - nb2);
-    else
-        return (nb2 - nb1);
+	if (nb1 > nb2)
+		return (nb1 - nb2);
+	else
+		return (nb2 - nb1);
 }
 
 int	ft_verify_sort(t_list **stack)

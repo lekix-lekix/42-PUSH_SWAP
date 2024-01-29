@@ -6,7 +6,7 @@
 #    By: kipouliq <kipouliq@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/18 12:11:49 by kipouliq          #+#    #+#              #
-#    Updated: 2024/01/16 17:42:07 by kipouliq         ###   ########.fr        #
+#    Updated: 2024/01/29 16:32:54 by kipouliq         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,11 @@ NAME = push_swap
 
 NAME_BONUS = checker
 
-SRC = list_functions.c \
+SRC = utils.c \
+		utils2.c \
+		utils3.c \
+		utils4.c \
+		list_functions.c \
 		list_functions2.c \
 		stack_instructions.c \
 		stack_instructions2.c \
@@ -22,9 +26,6 @@ SRC = list_functions.c \
 		args_parsing.c \
 		main.c \
 		sort_functions.c \
-		utils.c \
-		utils2.c \
-		utils3.c \
 		cost_target_functions.c \
 		index_chunks_functions.c \
 		select_move_nodes.c
@@ -32,6 +33,7 @@ SRC = list_functions.c \
 SRCS_BONUS = utils.c \
 		utils2.c \
 		utils3.c \
+		utils4.c \
 		list_functions.c \
 		list_functions2.c \
 		stack_instructions.c \
@@ -47,7 +49,7 @@ BONUS_OBJS = $(SRCS_BONUS:.c=.o)
 
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror -g3
 
 PATH_LIBFT = ./megalibft
 

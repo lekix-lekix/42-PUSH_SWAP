@@ -5,6 +5,7 @@
     "random": "c",
     "regex": "c",
     "sstream": "c",
-    "push_swap.h": "c"
+    "push_swap.h": "c",
+    "ft_printf.h": "c"
 }
 }
